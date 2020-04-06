@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.9.9",
     "@rocketseat/unform": "^1.6.2",
     "axios": "^0.19.2",
     "date-fns": "^2.11.1",

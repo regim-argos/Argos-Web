@@ -5,7 +5,8 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import { darken } from 'polished';
 
 export default createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&display=swap');
+
+@import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap');
   .regim-options{
     display: flex;
     align-items: center;
@@ -26,7 +27,7 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
   body {
-    background: #F2F7E2;
+    background: #23374D;
     -webkit-font-smoothing: antialiased;
   }
   body, input, button, textarea {
