@@ -24,7 +24,7 @@ export default function SingIn() {
                 color="primary"
                 type="button"
               >
-                SING UP
+                SIGN UP
               </CustomButton>
             </div>
           </div>
