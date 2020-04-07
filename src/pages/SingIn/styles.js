@@ -9,7 +9,6 @@ export const Container = styled.div`
   justify-content: center;
 
   > div {
-    height: 390px;
     width: 400px;
     background-color: #eee;
     border-radius: 10px;
