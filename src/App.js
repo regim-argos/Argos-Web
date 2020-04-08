@@ -4,6 +4,7 @@ import { Router } from 'react-router-dom';
 
 import GlobalStyle from './styles/global';
 import Routes from './routes';
+import './styles/styles.css';
 
 import history from './services/history';
 

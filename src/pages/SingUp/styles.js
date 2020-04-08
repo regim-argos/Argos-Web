@@ -1,56 +1,36 @@
 import styled from 'styled-components';
 import { Button } from '@material-ui/core';
+import Form from '~/components/Form';
 
-export const Container = styled.div`
-  height: 100vh;
-  width: 100vw;
+export const FormStyled = styled(Form)`
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-
-  > div {
-    width: 400px;
-    background-color: #eee;
-    border-radius: 10px;
-    padding: 25px;
-    > h1 {
-      color: #1089ff;
-      font-family: lato;
-      font-size: 55px;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    > form {
+  > div:last-child {
+    display: flex;
+    flex-direction: column;
+    > div:last-child {
       display: flex;
-      flex-direction: column;
       justify-content: center;
-      > div:last-child {
+      > span {
+        color: #424242;
+        font-family: roboto;
         display: flex;
-        flex-direction: column;
-        > div:last-child {
-          display: flex;
-          justify-content: center;
-          > span {
-            color: #424242;
-            font-family: roboto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-          > a {
-            margin-left: 5px;
-            text-decoration: none;
-            font-family: roboto;
-            font-size: 17px;
-            font-weight: 700;
-            color: #1089ff;
-            opacity: 0.8;
-            transition: 0.3s;
-          }
-          > a:hover {
-            opacity: 1;
-          }
-        }
+        justify-content: center;
+        align-items: center;
+      }
+      > a {
+        margin-left: 5px;
+        text-decoration: none;
+        font-family: roboto;
+        font-size: 17px;
+        font-weight: 700;
+        color: #1089ff;
+        opacity: 0.8;
+        transition: 0.3s;
+      }
+      > a:hover {
+        opacity: 1;
       }
     }
   }
