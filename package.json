@@ -5,6 +5,8 @@
   "dependencies": {
     "@material-ui/core": "^4.9.9",
     "@rocketseat/unform": "^1.6.2",
+    "@unform/core": "^2.0.0",
+    "@unform/web": "^2.0.0",
     "axios": "^0.19.2",
     "date-fns": "^2.11.1",
     "date-fns-tz": "^1.0.10",

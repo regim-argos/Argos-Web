@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TextField, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 export const Container = styled.div`
   height: 100vh;
@@ -9,7 +9,6 @@ export const Container = styled.div`
   justify-content: center;
 
   > div {
-    height: 450px;
     width: 400px;
     background-color: #eee;
     border-radius: 10px;
@@ -54,12 +53,6 @@ export const Container = styled.div`
         }
       }
     }
-  }
-`;
-
-export const CustomInput = styled(TextField)`
-  + * {
-    margin-top: 15px !important;
   }
 `;
 
