@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { MdExitToApp, MdAdd } from 'react-icons/md';
 
-import { Button } from '@material-ui/core';
 import StyledButton from '../../components/RoundButton';
 import WatcherList from '../../components/List';
 import { Container } from './styles';
 
 export default function Watchers() {
-  const [watchers, setWatchers] = useState([
+  const [watchers] = useState([
     { name: 'Regim', status: true, active: true },
     { name: 'Argos', status: false, active: true },
     { name: 'Regim API', status: true, active: false },
@@ -26,6 +25,7 @@ export default function Watchers() {
           </div>
           <ul>
             {watchers.map((watcher, index) => (
+              // eslint-disable-next-line react/no-array-index-key
               <WatcherList key={index} watcher={watcher} />
             ))}
           </ul>
