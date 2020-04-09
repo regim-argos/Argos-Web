@@ -2,9 +2,11 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 
+import { useDispatch, useSelector } from 'react-redux';
 import { CustomButton, FormStyled } from './styles';
 import Input from '~/components/Input/';
 import AuthContainer from '~/components/AuthContainer';
+import { signInRequest } from '~/store/modules/auth/actions';
 
 const schema = Yup.object().shape({
   email: Yup.string().email().required(),
@@ -14,8 +16,11 @@ const schema = Yup.object().shape({
 export default function SingIn() {
   const history = useHistory();
 
-  async function handleSubmit(data) {
-    console.log(data);
+  const loading = useSelector((state) => state.auth.loading);
+  const dispatch = useDispatch();
+
+  async function handleSubmit({ email, password }) {
+    dispatch(signInRequest(email, password));
   }
 
   return (
@@ -32,12 +37,12 @@ export default function SingIn() {
           <Link to="/"> Forgot Your Password?</Link>
           <div>
             <CustomButton variant="contained" color="primary" type="submit">
-              LOGIN
+              {loading ? 'Loading...' : 'Login'}
             </CustomButton>
             <CustomButton
               onClick={() => history.push('/register')}
               color="primary"
-              type="button"
+              type="submit"
             >
               SIGN UP
             </CustomButton>

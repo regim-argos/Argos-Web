@@ -11,6 +11,7 @@ export default function Watchers() {
     { name: 'Argos', status: false, active: true },
     { name: 'Regim API', status: true, active: false },
   ]);
+
   return (
     <Container>
       <div>
@@ -20,7 +21,6 @@ export default function Watchers() {
         </nav>
         <div>
           <div>
-            {/* <input type="text" placeholder="Search" /> */}
             <StyledButton Icon={MdAdd} color="#6081F5" />
           </div>
           <ul>

@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 
 // import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import Input from '~/components/Input/';
 
 import { CustomButton, FormStyled } from './styles';
 import AuthContainer from '~/components/AuthContainer';
+import { signUpRequest } from '~/store/modules/auth/actions';
 
 const schema = Yup.object().shape({
   name: Yup.string().required(),
@@ -15,8 +17,11 @@ const schema = Yup.object().shape({
 });
 
 export default function SingUp() {
-  async function handleSubmit(data) {
-    console.log(data);
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.auth.loading);
+
+  async function handleSubmit({ name, email, password }) {
+    dispatch(signUpRequest(name, email, password));
   }
 
   return (
@@ -32,7 +37,7 @@ export default function SingUp() {
         />
         <div>
           <CustomButton variant="contained" color="primary" type="submit">
-            LOGIN
+            {loading ? 'Loading...' : 'Sign up'}
           </CustomButton>
           <div>
             <span>Already have an account? </span>
