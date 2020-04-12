@@ -11,7 +11,10 @@ import {
 import StyledButton from '../RoundButton';
 import { WatcherList, StatusInfo } from './styles';
 
-export default function List({ watcher: { name, status, active }, color }) {
+export default function List({
+  watcher: { name, status, active, id },
+  handleDelete,
+}) {
   return (
     <WatcherList>
       <div>
@@ -32,7 +35,11 @@ export default function List({ watcher: { name, status, active }, color }) {
           color={active ? '#44B04C' : '#9C9C9C'}
         />
         <StyledButton Icon={MdEdit} color="#DEB23C" />
-        <StyledButton Icon={MdDelete} color="#C5474B" />
+        <StyledButton
+          onClick={() => handleDelete(id)}
+          Icon={MdDelete}
+          color="#C5474B"
+        />
       </div>
     </WatcherList>
   );

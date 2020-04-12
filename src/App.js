@@ -5,13 +5,14 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 
 import './config/ReactotronConfig';
+import { store, persistor } from './store';
 
 import GlobalStyle from './styles/global';
 import Routes from './routes';
 import './styles/styles.css';
 
 import history from './services/history';
-import { store, persistor } from './store';
+import 'react-perfect-scrollbar/dist/css/styles.css';
 
 function App() {
   return (
