@@ -13,7 +13,6 @@ import { WatcherList, StatusInfo } from './styles';
 
 export default function List({
   watcher: { name, status, active, id },
-  color,
   handleDelete,
 }) {
   return (
