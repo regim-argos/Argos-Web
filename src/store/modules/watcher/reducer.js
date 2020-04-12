@@ -8,11 +8,16 @@ const INITIAL_STATE = {
 export default function watcher(state = INITIAL_STATE, action) {
   return produce(state, (draft) => {
     switch (action.type) {
-      case '@watcher/WATCHERS_REQUEST': {
+      case '@watcher/WATCHERS_REQUEST':
+      case '@watcher/WATCHERS_SAVE_RESQUEST':
+      case '@watcher/WATCHERS_DELETE': {
         draft.loading = true;
         break;
       }
-      case '@watcher/WATCHERS_FAILURE': {
+      case '@watcher/WATCHERS_FAILURE':
+      case '@watcher/WATCHERS_SAVE_SUCCESS':
+      case '@watcher/WATCHERS_SAVE_FALIURE':
+      case '@watcher/WATCHERS_DELETE_SUCCESS': {
         draft.loading = false;
         break;
       }
@@ -21,15 +26,7 @@ export default function watcher(state = INITIAL_STATE, action) {
         draft.watchers = action.payload.watchers;
         break;
       }
-      case '@watcher/WATCHERS_DELETE': {
-        draft.loading = true;
-        break;
-      }
-      case '@watcher/WATCHERS_DELETE_SUCCESS': {
-        draft.loading = false;
 
-        break;
-      }
       default:
     }
   });

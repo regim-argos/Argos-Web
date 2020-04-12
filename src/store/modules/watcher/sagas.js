@@ -7,6 +7,8 @@ import {
   watchersFailure,
   watchersDeleteSuccess,
   watchersRequest,
+  watchersSaveFaliure,
+  watchersSaveSuccess,
 } from './actions';
 
 export function* getWatchers() {
@@ -32,7 +34,20 @@ export function* watchersDelete({ payload }) {
   }
 }
 
+export function* watchersSave({ payload }) {
+  try {
+    yield call(api.put, `watchers/${payload.watcher.id}`, payload.watcher);
+
+    yield put(watchersSaveSuccess());
+    yield put(watchersRequest());
+  } catch (err) {
+    toast.error("Error, can't change status");
+    yield put(watchersSaveFaliure());
+  }
+}
+
 export default all([
   takeLatest('@watcher/WATCHERS_REQUEST', getWatchers),
+  takeLatest('@watcher/WATCHERS_SAVE_RESQUEST', watchersSave),
   takeLatest('@watcher/WATCHERS_DELETE', watchersDelete),
 ]);

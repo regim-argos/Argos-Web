@@ -29,3 +29,21 @@ export function watchersDeleteSuccess() {
     type: '@watcher/WATCHERS_DELETE_SUCCESS',
   };
 }
+
+export function watchersSaveRequest(watcher) {
+  return {
+    type: '@watcher/WATCHERS_SAVE_RESQUEST',
+    payload: { watcher },
+  };
+}
+export function watchersSaveSuccess() {
+  return {
+    type: '@watcher/WATCHERS_SAVE_SUCCESS',
+  };
+}
+
+export function watchersSaveFaliure() {
+  return {
+    type: '@watcher/WATCHERS_SAVE_FALIURE',
+  };
+}
