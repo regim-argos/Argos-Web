@@ -13,7 +13,9 @@ import { WatcherList, StatusInfo } from './styles';
 
 export default function List({
   watcher: { name, status, active, id },
+  watcher,
   handleDelete,
+  handleSave,
 }) {
   return (
     <WatcherList>
@@ -33,6 +35,7 @@ export default function List({
         <StyledButton
           Icon={MdPowerSettingsNew}
           color={active ? '#44B04C' : '#9C9C9C'}
+          onClick={() => handleSave({ ...watcher, active: !active })}
         />
         <StyledButton Icon={MdEdit} color="#DEB23C" />
         <StyledButton

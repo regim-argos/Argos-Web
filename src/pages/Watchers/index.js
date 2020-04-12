@@ -9,6 +9,7 @@ import { Container } from './styles';
 import {
   watchersRequest,
   watchersDelete,
+  watchersSaveRequest,
 } from '~/store/modules/watcher/actions';
 import Loading from '~/components/Loading';
 
@@ -24,6 +25,9 @@ export default function Watchers() {
 
   function handleDelete(id) {
     dispatch(watchersDelete(id));
+  }
+  function handleSave(watcher) {
+    dispatch(watchersSaveRequest(watcher));
   }
 
   return (
@@ -44,6 +48,7 @@ export default function Watchers() {
                   key={watcher.id}
                   watcher={watcher}
                   handleDelete={handleDelete}
+                  handleSave={handleSave}
                 />
               ))}
             </ul>
