@@ -22,6 +22,10 @@ export const WatcherList = styled.li`
   }
   > div {
     display: flex;
+    > a {
+      display: flex;
+      margin-right: 7px;
+    }
     > button {
       margin-right: 7px;
     }
@@ -33,7 +37,7 @@ export const StatusInfo = styled.div`
   width: 34px;
   border-radius: 50%;
   background-color: ${({ status }) => (status ? '#44B04C' : '#C5474B')};
-  margin: 0 10px;
+
   display: flex;
   align-items: center;
   justify-content: center;

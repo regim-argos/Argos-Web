@@ -12,11 +12,12 @@ import StyledButton from '../RoundButton';
 import { WatcherList, StatusInfo } from './styles';
 
 export default function List({
-  watcher: { name, status, active, id },
+  watcher: { name, status, active, id, url },
   watcher,
   handleDelete,
   handleSave,
 }) {
+  console.log(url);
   return (
     <WatcherList>
       <div>
@@ -31,7 +32,9 @@ export default function List({
       </div>
 
       <div>
-        <StyledButton Icon={MdLink} color="#6081F5" />
+        <a href={url} target="_blank" rel="noopener noreferrer">
+          <StyledButton Icon={MdLink} color="#6081F5" />
+        </a>
         <StyledButton
           Icon={MdPowerSettingsNew}
           color={active ? '#44B04C' : '#9C9C9C'}
