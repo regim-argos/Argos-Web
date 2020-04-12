@@ -14,9 +14,12 @@ export const WatcherList = styled.li`
   }
   > div {
     display: flex;
+
+    margin: 0 10px;
     align-items: center;
     > span {
       font-weight: bold;
+      margin: 10px;
       color: #fff;
     }
   }
@@ -37,7 +40,7 @@ export const StatusInfo = styled.div`
   width: 34px;
   border-radius: 50%;
   background-color: ${({ status }) => (status ? '#44B04C' : '#C5474B')};
-
+  margin: 0 10;
   display: flex;
   align-items: center;
   justify-content: center;
