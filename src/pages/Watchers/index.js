@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdExitToApp, MdAdd } from 'react-icons/md';
 
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -10,12 +10,17 @@ import {
   watchersRequest,
   watchersDelete,
   watchersSaveRequest,
+  watcherOpenModal,
+  watcherCloseModal,
 } from '~/store/modules/watcher/actions';
 import Loading from '~/components/Loading';
 
+import ModalContainer from './WatcherForm';
+
 export default function Watchers() {
   const dispatch = useDispatch();
-
+  const [editWatcher, setEditWatcher] = useState({});
+  const open = useSelector((state) => state.watcher.openModal);
   const loading = useSelector((state) => state.watcher.loading);
   const watchers = useSelector((state) => state.watcher.watchers);
 
@@ -30,6 +35,17 @@ export default function Watchers() {
     dispatch(watchersSaveRequest(watcher));
   }
 
+  function handleEditWatcher(watcher) {
+    setEditWatcher(watcher);
+    dispatch(watcherOpenModal());
+  }
+
+  function closeModal() {
+    dispatch(watcherCloseModal());
+
+    setEditWatcher({});
+  }
+
   return (
     <>
       <Container>
@@ -40,13 +56,18 @@ export default function Watchers() {
           </nav>
           <PerfectScrollbar>
             <div>
-              <StyledButton Icon={MdAdd} color="#6081F5" />
+              <StyledButton
+                Icon={MdAdd}
+                color="#6081F5"
+                onClick={() => dispatch(watcherOpenModal())}
+              />
             </div>
             <ul>
               {watchers.map((watcher) => (
                 <WatcherList
                   key={watcher.id}
                   watcher={watcher}
+                  handleChange={handleEditWatcher}
                   handleDelete={handleDelete}
                   handleSave={handleSave}
                 />
@@ -56,6 +77,11 @@ export default function Watchers() {
         </div>
       </Container>
       <Loading loading={loading} />
+      <ModalContainer
+        initialData={editWatcher}
+        open={open}
+        onClose={closeModal}
+      />
     </>
   );
 }

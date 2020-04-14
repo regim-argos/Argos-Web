@@ -5,7 +5,13 @@ import { Form as Unform } from '@unform/web';
 
 // import { Container } from './styles';
 
-export default function Form({ schema, submitFunction, children, ...rest }) {
+export default function Form({
+  schema,
+  submitFunction,
+  initialData,
+  children,
+  ...rest
+}) {
   const formRef = useRef(null);
   async function handleSubmit(data) {
     try {
@@ -28,7 +34,12 @@ export default function Form({ schema, submitFunction, children, ...rest }) {
     }
   }
   return (
-    <Unform ref={formRef} onSubmit={handleSubmit} {...rest}>
+    <Unform
+      initialData={initialData}
+      ref={formRef}
+      onSubmit={handleSubmit}
+      {...rest}
+    >
       {children}
     </Unform>
   );

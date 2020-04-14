@@ -3,6 +3,7 @@ import produce from 'immer';
 const INITIAL_STATE = {
   watchers: [],
   loading: false,
+  openModal: false,
 };
 
 export default function watcher(state = INITIAL_STATE, action) {
@@ -24,6 +25,14 @@ export default function watcher(state = INITIAL_STATE, action) {
       case '@watcher/WATCHERS_SUCCESS': {
         draft.loading = false;
         draft.watchers = action.payload.watchers;
+        break;
+      }
+      case '@watcher/OPEN_MODAL': {
+        draft.openModal = true;
+        break;
+      }
+      case '@watcher/CLOSE_MODAL': {
+        draft.openModal = false;
         break;
       }
 

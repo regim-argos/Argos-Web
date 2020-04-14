@@ -47,3 +47,15 @@ export function watchersSaveFaliure() {
     type: '@watcher/WATCHERS_SAVE_FALIURE',
   };
 }
+
+export function watcherOpenModal() {
+  return {
+    type: '@watcher/OPEN_MODAL',
+  };
+}
+
+export function watcherCloseModal() {
+  return {
+    type: '@watcher/CLOSE_MODAL',
+  };
+}
