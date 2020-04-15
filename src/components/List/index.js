@@ -16,8 +16,8 @@ export default function List({
   watcher,
   handleDelete,
   handleSave,
+  handleChange,
 }) {
-  console.log(url);
   return (
     <WatcherList>
       <div>
@@ -40,7 +40,11 @@ export default function List({
           color={active ? '#44B04C' : '#9C9C9C'}
           onClick={() => handleSave({ ...watcher, active: !active })}
         />
-        <StyledButton Icon={MdEdit} color="#DEB23C" />
+        <StyledButton
+          Icon={MdEdit}
+          color="#DEB23C"
+          onClick={() => handleChange(watcher)}
+        />
         <StyledButton
           onClick={() => handleDelete(id)}
           Icon={MdDelete}

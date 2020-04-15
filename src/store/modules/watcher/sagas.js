@@ -9,6 +9,7 @@ import {
   watchersRequest,
   watchersSaveFaliure,
   watchersSaveSuccess,
+  watcherCloseModal,
 } from './actions';
 
 export function* getWatchers() {
@@ -36,12 +37,17 @@ export function* watchersDelete({ payload }) {
 
 export function* watchersSave({ payload }) {
   try {
-    yield call(api.put, `watchers/${payload.watcher.id}`, payload.watcher);
+    if (payload.watcher.id) {
+      yield call(api.put, `watchers/${payload.watcher.id}`, payload.watcher);
+    } else {
+      yield call(api.post, `watchers`, payload.watcher);
+    }
 
     yield put(watchersSaveSuccess());
+    yield put(watcherCloseModal());
     yield put(watchersRequest());
   } catch (err) {
-    toast.error("Error, can't change status");
+    toast.error(`Error, ${err.response.data.message}`);
     yield put(watchersSaveFaliure());
   }
 }
