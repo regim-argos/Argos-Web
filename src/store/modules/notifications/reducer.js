@@ -17,11 +17,11 @@ export default function notification(state = INITIAL_STATE, action) {
         draft.loading = false;
         break;
 
-      case '@notification/NOTIFICATIONS_SUCCESS': {
+      case '@notification/NOTIFICATIONS_SUCCESS':
         draft.loading = false;
         draft.notifications = action.payload.notifications;
         break;
-      }
+
       default:
     }
   });
