@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { Button } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import Input from '../../../components/Input';
-import { ModalContainer } from './styles';
+import { WatcherFormModal } from './styles';
 import Form from '~/components/Form';
 import { watchersSaveRequest } from '~/store/modules/watcher/actions';
 
@@ -21,7 +21,7 @@ export default function WatcherForm({ open, onClose, initialData }) {
   const dispatch = useDispatch();
 
   return (
-    <ModalContainer open={open} onClose={onClose}>
+    <WatcherFormModal open={open} onClose={onClose}>
       <div id="watcherForm">
         <Form
           initialData={initialData}
@@ -39,6 +39,6 @@ export default function WatcherForm({ open, onClose, initialData }) {
           </Button>
         </Form>
       </div>
-    </ModalContainer>
+    </WatcherFormModal>
   );
 }

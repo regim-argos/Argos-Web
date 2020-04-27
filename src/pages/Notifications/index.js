@@ -5,10 +5,12 @@ import { Container } from './styles';
 import NotificationList from '../../components/NotificationList';
 
 import Loading from '~/components/Loading';
-
+import NotificationFormModal from './NotificationForm';
 import {
   notificationsRequest,
   notificationDelete,
+  notificationOpenModal,
+  notificationCloseModal,
 } from '../../store/modules/notifications/actions';
 
 export default function Notifications() {
@@ -16,8 +18,9 @@ export default function Notifications() {
   const notifications = useSelector(
     (state) => state.notification.notifications
   );
+  const open = useSelector((state) => state.notification.openModal);
   const loading = useSelector((state) => state.notification.loading);
-  console.log(loading);
+
   useEffect(() => {
     dispatch(notificationsRequest());
   }, [dispatch]);
@@ -25,11 +28,19 @@ export default function Notifications() {
   function handleDelete(id) {
     dispatch(notificationDelete(id));
   }
+
+  function openModal() {
+    dispatch(notificationOpenModal());
+  }
+  function closeModal() {
+    dispatch(notificationCloseModal());
+  }
+
   return (
     <>
       <Container>
         <div>
-          <StyledButton />
+          <StyledButton onClick={() => openModal()} />
         </div>
         <ul>
           {notifications.map((notification) => (
@@ -42,6 +53,7 @@ export default function Notifications() {
         </ul>
       </Container>
       <Loading loading={loading} />
+      <NotificationFormModal open={open} onClose={closeModal} />
     </>
   );
 }

@@ -22,6 +22,13 @@ export default function notification(state = INITIAL_STATE, action) {
         draft.notifications = action.payload.notifications;
         break;
 
+      case '@notification/OPEN_MODAL':
+        draft.openModal = true;
+        break;
+      case '@notification/CLOSE_MODAL':
+        draft.openModal = false;
+        break;
+
       default:
     }
   });

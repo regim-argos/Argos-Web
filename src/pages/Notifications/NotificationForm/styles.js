@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { Modal } from '@material-ui/core';
 
-export const WatcherFormModal = styled(Modal)`
+export const NotificationFormModal = styled(Modal)`
   display: flex;
   justify-content: center;
   align-items: center;
 
-  > div#watcherForm {
+  > div#notificationForm {
     background-color: #eee;
     border-radius: 10px;
     padding: 25px;
