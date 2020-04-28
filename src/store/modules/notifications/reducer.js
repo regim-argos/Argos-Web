@@ -10,10 +10,13 @@ export default function notification(state = INITIAL_STATE, action) {
     switch (action.type) {
       case '@notification/NOTIFICATIONS_REQUEST':
       case '@notification/NOTIFICATIONS_DELETE':
+      case '@notification/NOTIFICATIONS_SAVE_RESQUEST':
         draft.loading = true;
         break;
       case '@notification/NOTIFICATIONS_FALIURE':
       case '@notification/NOTIFICATIONS_DELETE_SUCCESS':
+      case '@notification/NOTIFICATIONS_SAVE_SUCCESS':
+      case '@notification/NOTIFICATIONS_SAVE_FALIURE':
         draft.loading = false;
         break;
 
