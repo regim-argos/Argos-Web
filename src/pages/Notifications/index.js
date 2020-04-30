@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import StyledButton from '../../components/RoundButton';
 import { Container } from './styles';
@@ -15,6 +15,7 @@ import {
 
 export default function Notifications() {
   const dispatch = useDispatch();
+  const [editNotification, setNotification] = useState({});
   const notifications = useSelector(
     (state) => state.notification.notifications
   );
@@ -25,6 +26,11 @@ export default function Notifications() {
     dispatch(notificationsRequest());
   }, [dispatch]);
 
+  function handleEditNotification(notification) {
+    setNotification(notification);
+    dispatch(notificationOpenModal());
+  }
+
   function handleDelete(id) {
     dispatch(notificationDelete(id));
   }
@@ -34,6 +40,7 @@ export default function Notifications() {
   }
   function closeModal() {
     dispatch(notificationCloseModal());
+    setNotification({});
   }
 
   return (
@@ -48,12 +55,17 @@ export default function Notifications() {
               key={notification.id}
               notification={notification}
               handleDelete={handleDelete}
+              handleEditNotification={handleEditNotification}
             />
           ))}
         </ul>
       </Container>
       <Loading loading={loading} />
-      <NotificationFormModal open={open} onClose={closeModal} />
+      <NotificationFormModal
+        initialData={editNotification}
+        open={open}
+        onClose={closeModal}
+      />
     </>
   );
 }

@@ -9,7 +9,7 @@ export default function List({
   notification,
   handleDelete,
   handleSave,
-  handleChange,
+  handleEditNotification,
 }) {
   return (
     <NotificationList>
@@ -17,7 +17,11 @@ export default function List({
         <span>{platform}</span>
       </div>
       <div>
-        <StyledButton Icon={MdEdit} color="#DEB23C" />
+        <StyledButton
+          Icon={MdEdit}
+          color="#DEB23C"
+          onClick={() => handleEditNotification(notification)}
+        />
         <StyledButton
           Icon={MdDelete}
           color="#C5474B"
