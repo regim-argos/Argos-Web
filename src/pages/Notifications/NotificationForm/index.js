@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from '@material-ui/core';
 
 import { useDispatch } from 'react-redux';
@@ -17,20 +17,21 @@ const schema = Yup.object().shape({
   }),
 });
 
-export default function NotificationForm({ open, onClose }) {
+export default function NotificationForm({ open, onClose, initialData }) {
   const dispatch = useDispatch();
-
+  useEffect(() => console.log(initialData), [initialData]);
   return (
     <NotificationFormModal open={open} onClose={onClose}>
       <div id="notificationForm">
         <Form
+          initialData={initialData}
           schema={schema}
           submitFunction={(data) => {
             dispatch(notificationSaveRequest(data));
             console.log(data);
           }}
         >
-          {/* <Input name="id" type="hidden" variant="outlined" /> */}
+          <Input name="id" type="hidden" variant="outlined" />
           <SelectInput
             name="platform"
             label="Platform"

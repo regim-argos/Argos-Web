@@ -37,7 +37,16 @@ export function* deleteNotifications({ payload }) {
 }
 export function* saveNotifications({ payload }) {
   try {
-    yield call(api.post, 'notifications', payload.notification);
+    if (payload.notification.id) {
+      yield call(
+        api.put,
+        `notifications/${payload.notification.id}`,
+        payload.notification
+      );
+      console.log(payload.notification.id);
+    } else {
+      yield call(api.post, 'notifications', payload.notification);
+    }
 
     yield put(notificationSaveSuccess());
     yield put(notificationCloseModal());
