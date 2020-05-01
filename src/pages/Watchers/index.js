@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { MdExitToApp, MdAdd } from 'react-icons/md';
+import { MdAdd } from 'react-icons/md';
 
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useDispatch, useSelector } from 'react-redux';
 import StyledButton from '../../components/RoundButton';
 import WatcherList from '../../components/List';
@@ -50,31 +49,23 @@ export default function Watchers() {
     <>
       <Container>
         <div>
-          <nav>
-            <h1>Argos</h1>
-            <StyledButton Icon={MdExitToApp} color="#C5474B" />
-          </nav>
-          <PerfectScrollbar>
-            <div>
-              <StyledButton
-                Icon={MdAdd}
-                color="#6081F5"
-                onClick={() => dispatch(watcherOpenModal())}
-              />
-            </div>
-            <ul>
-              {watchers.map((watcher) => (
-                <WatcherList
-                  key={watcher.id}
-                  watcher={watcher}
-                  handleChange={handleEditWatcher}
-                  handleDelete={handleDelete}
-                  handleSave={handleSave}
-                />
-              ))}
-            </ul>
-          </PerfectScrollbar>
+          <StyledButton
+            Icon={MdAdd}
+            color="#6081F5"
+            onClick={() => dispatch(watcherOpenModal())}
+          />
         </div>
+        <ul>
+          {watchers.map((watcher) => (
+            <WatcherList
+              key={watcher.id}
+              watcher={watcher}
+              handleChange={handleEditWatcher}
+              handleDelete={handleDelete}
+              handleSave={handleSave}
+            />
+          ))}
+        </ul>
       </Container>
       <Loading loading={loading} />
       <ModalContainer

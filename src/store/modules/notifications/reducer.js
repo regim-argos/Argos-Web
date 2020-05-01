@@ -1,0 +1,28 @@
+import produce from 'immer';
+
+const INITIAL_STATE = {
+  notifications: [],
+  loading: false,
+  openModal: false,
+};
+export default function notification(state = INITIAL_STATE, action) {
+  return produce(state, (draft) => {
+    switch (action.type) {
+      case '@notification/NOTIFICATIONS_REQUEST':
+      case '@notification/NOTIFICATIONS_DELETE':
+        draft.loading = true;
+        break;
+      case '@notification/NOTIFICATIONS_FALIURE':
+      case '@notification/NOTIFICATIONS_DELETE_SUCCESS':
+        draft.loading = false;
+        break;
+
+      case '@notification/NOTIFICATIONS_SUCCESS':
+        draft.loading = false;
+        draft.notifications = action.payload.notifications;
+        break;
+
+      default:
+    }
+  });
+}
