@@ -14,7 +14,7 @@ import {
 } from '~/store/modules/watcher/actions';
 import Loading from '~/components/Loading';
 
-import ModalContainer from './WatcherForm';
+import WatcherFormModal from './WatcherForm';
 
 export default function Watchers() {
   const dispatch = useDispatch();
@@ -68,7 +68,7 @@ export default function Watchers() {
         </ul>
       </Container>
       <Loading loading={loading} />
-      <ModalContainer
+      <WatcherFormModal
         initialData={editWatcher}
         open={open}
         onClose={closeModal}

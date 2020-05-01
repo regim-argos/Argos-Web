@@ -28,3 +28,31 @@ export function notificationDeleteSuccess() {
     type: '@notification/NOTIFICATIONS_DELETE_SUCCESS',
   };
 }
+
+export function notificationOpenModal() {
+  return {
+    type: '@notification/OPEN_MODAL',
+  };
+}
+
+export function notificationCloseModal() {
+  return {
+    type: '@notification/CLOSE_MODAL',
+  };
+}
+export function notificationSaveRequest(notification) {
+  return {
+    type: '@notification/NOTIFICATIONS_SAVE_RESQUEST',
+    payload: { notification },
+  };
+}
+export function notificationSaveSuccess() {
+  return {
+    type: '@notification/NOTIFICATIONS_SAVE_SUCCESS',
+  };
+}
+export function notificationSaveFaliure() {
+  return {
+    type: '@notification/NOTIFICATIONS_SAVE_FALIURE',
+  };
+}

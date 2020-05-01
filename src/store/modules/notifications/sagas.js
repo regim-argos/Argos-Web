@@ -7,6 +7,9 @@ import {
   notificationsFaliure,
   notificationDeleteSuccess,
   notificationsRequest,
+  notificationSaveSuccess,
+  notificationSaveFaliure,
+  notificationCloseModal,
 } from './actions';
 
 export function* getNotifications() {
@@ -32,8 +35,21 @@ export function* deleteNotifications({ payload }) {
     yield put(notificationsFaliure());
   }
 }
+export function* saveNotifications({ payload }) {
+  try {
+    yield call(api.post, 'notifications', payload.notification);
+
+    yield put(notificationSaveSuccess());
+    yield put(notificationCloseModal());
+    yield put(notificationsRequest());
+  } catch (err) {
+    toast.error("Error, can't find notifications");
+    yield put(notificationSaveFaliure());
+  }
+}
 
 export default all([
   takeLatest('@notification/NOTIFICATIONS_REQUEST', getNotifications),
   takeLatest('@notification/NOTIFICATIONS_DELETE', deleteNotifications),
+  takeLatest('@notification/NOTIFICATIONS_SAVE_RESQUEST', saveNotifications),
 ]);
