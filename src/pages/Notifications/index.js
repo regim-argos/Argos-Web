@@ -11,6 +11,7 @@ import {
   notificationDelete,
   notificationOpenModal,
   notificationCloseModal,
+  notificationSaveRequest,
 } from '../../store/modules/notifications/actions';
 
 export default function Notifications() {
@@ -42,6 +43,9 @@ export default function Notifications() {
     dispatch(notificationCloseModal());
     setNotification({});
   }
+  function handleSave(notification) {
+    dispatch(notificationSaveRequest(notification));
+  }
 
   return (
     <>
@@ -55,6 +59,7 @@ export default function Notifications() {
               key={notification.id}
               notification={notification}
               handleDelete={handleDelete}
+              handleSave={handleSave}
               handleEditNotification={handleEditNotification}
             />
           ))}

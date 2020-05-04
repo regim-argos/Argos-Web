@@ -1,11 +1,11 @@
 import React from 'react';
-import { MdEdit, MdDelete } from 'react-icons/md';
+import { MdEdit, MdDelete, MdPowerSettingsNew } from 'react-icons/md';
 
 import StyledButton from '../RoundButton';
 import { NotificationList } from './styles';
 
 export default function List({
-  notification: { platform, id },
+  notification: { platform, id, active },
   notification,
   handleDelete,
   handleSave,
@@ -17,6 +17,11 @@ export default function List({
         <span>{platform}</span>
       </div>
       <div>
+        <StyledButton
+          Icon={MdPowerSettingsNew}
+          color={active ? '#44B04C' : '#9C9C9C'}
+          onClick={() => handleSave({ ...notification, active: !active })}
+        />
         <StyledButton
           Icon={MdEdit}
           color="#DEB23C"
