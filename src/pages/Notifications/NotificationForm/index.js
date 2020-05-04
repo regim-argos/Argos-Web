@@ -11,6 +11,7 @@ import SelectInput from '~/components/SelectInput';
 import { notificationSaveRequest } from '~/store/modules/notifications/actions';
 
 const schema = Yup.object().shape({
+  name: Yup.string().required().trim(),
   platform: Yup.string().required().trim(),
   platformData: Yup.object().required().shape({
     webhook: Yup.string().url().required(),
@@ -28,10 +29,10 @@ export default function NotificationForm({ open, onClose, initialData }) {
           schema={schema}
           submitFunction={(data) => {
             dispatch(notificationSaveRequest(data));
-            console.log(data);
           }}
         >
           <Input name="id" type="hidden" variant="outlined" />
+          <Input name="name" type="text" label="Name" variant="outlined" />
           <SelectInput
             name="platform"
             label="Platform"
