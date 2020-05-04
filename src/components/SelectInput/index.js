@@ -37,7 +37,7 @@ export default function SelectInput({ name, options, ...rest }) {
           </option>
         ))}
       </Select>
-      {error && <FormHelperText>{error || ''}</FormHelperText>}
+      {error && <FormHelperText>{error}</FormHelperText>}
     </FormControl>
   );
 }
