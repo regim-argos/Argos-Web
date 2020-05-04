@@ -5,7 +5,7 @@ import StyledButton from '../RoundButton';
 import { NotificationList } from './styles';
 
 export default function List({
-  notification: { platform, id, active },
+  notification: { platform, id, active, name },
   notification,
   handleDelete,
   handleSave,
@@ -14,7 +14,7 @@ export default function List({
   return (
     <NotificationList>
       <div>
-        <span>{platform}</span>
+        <span>{name}</span>
       </div>
       <div>
         <StyledButton
