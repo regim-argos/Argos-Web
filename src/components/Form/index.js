@@ -15,7 +15,6 @@ export default function Form({
   const formRef = useRef(null);
   async function handleSubmit(data) {
     try {
-      console.log(data);
       formRef.current.setErrors({});
 
       const validated = await schema.validate(data, {
