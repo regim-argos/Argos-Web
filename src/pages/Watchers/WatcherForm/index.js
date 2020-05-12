@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import * as Yup from 'yup';
 
@@ -10,14 +10,12 @@ import Form from '~/components/Form';
 import { watchersSaveRequest } from '~/store/modules/watcher/actions';
 
 const schema = Yup.object().shape({
-  id: Yup.number().integer(),
   name: Yup.string().trim().required(),
   url: Yup.string().url().trim().required(),
   delay: Yup.number().integer().min(10, 'must be greater than or equal to 10'),
 });
 
 export default function WatcherForm({ open, onClose, initialData }) {
-  useEffect(() => console.log(initialData), [initialData]);
   const dispatch = useDispatch();
 
   return (
