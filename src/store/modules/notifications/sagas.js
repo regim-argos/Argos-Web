@@ -25,7 +25,6 @@ export function* getNotifications() {
 
 export function* deleteNotifications({ payload }) {
   try {
-    console.log(payload);
     yield call(api.delete, `notifications/${payload.id}`);
 
     yield put(notificationDeleteSuccess());
@@ -43,7 +42,6 @@ export function* saveNotifications({ payload }) {
         `notifications/${payload.notification.id}`,
         payload.notification
       );
-      console.log(payload.notification.id);
     } else {
       yield call(api.post, 'notifications', payload.notification);
     }
