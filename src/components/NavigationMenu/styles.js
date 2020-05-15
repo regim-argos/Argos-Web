@@ -23,4 +23,5 @@ export const NavTab = styled(NavLink).attrs(() => ({
   justify-content: center;
   align-items: center;
   letter-spacing: 1.2px;
+  transition: 0.4s;
 `;
