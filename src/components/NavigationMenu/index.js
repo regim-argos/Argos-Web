@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { NavMenuContainer, NavTab, SelectedBar } from './styles';
+import { NavMenuContainer, NavTab } from './styles';
 
 export default function NavigationMenu() {
   function NavTabBar({ tabName, to }) {
