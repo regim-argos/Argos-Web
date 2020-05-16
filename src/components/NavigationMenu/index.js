@@ -3,14 +3,19 @@ import React from 'react';
 import { NavMenuContainer, NavTab } from './styles';
 
 export default function NavigationMenu() {
+  function NavTabBar({ tabName, to }) {
+    return (
+      <NavTab to={to}>
+        <strong>{tabName}</strong>
+        <div />
+      </NavTab>
+    );
+  }
+
   return (
     <NavMenuContainer>
-      <NavTab to="/watchers">
-        <strong>Watchers</strong>
-      </NavTab>
-      <NavTab to="/notifications">
-        <strong>Notification</strong>
-      </NavTab>
+      <NavTabBar tabName="Watchers" to="/watchers" />
+      <NavTabBar tabName="Notifications" to="/notifications" />
     </NavMenuContainer>
   );
 }
