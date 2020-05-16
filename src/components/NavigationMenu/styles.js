@@ -4,8 +4,16 @@ import { NavLink } from 'react-router-dom';
 export const NavMenuContainer = styled.nav`
   display: flex;
   .selected {
-    background-color: #6081f5;
-    font-size: 20px;
+    > strong {
+      font-size: 20px;
+      background: linear-gradient(to right, #9bafd9, #4867a5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    > div {
+      background: linear-gradient(to right, #9bafd9, #4867a5);
+    }
   }
 `;
 
@@ -13,15 +21,24 @@ export const NavTab = styled(NavLink).attrs(() => ({
   activeClassName: 'selected',
 }))`
   flex: 1;
-  background: #0852bc;
+  background: #1a2b3d;
   display: flex;
   border: none;
   height: 46px;
-  color: #fff;
-  font-size: 18px;
   text-decoration: none;
-  justify-content: center;
   align-items: center;
+  justify-content: space-between;
   letter-spacing: 1.2px;
-  transition: 0.4s;
+  flex-direction: column;
+
+  > strong {
+    margin-top: 10px;
+    color: #eee;
+    font-size: 18px;
+  }
+
+  > div {
+    height: 4px;
+    width: 100%;
+  }
 `;
