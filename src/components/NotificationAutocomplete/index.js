@@ -12,8 +12,6 @@ function NotificationAutocomplete({ itemList, initialData }) {
     ? initialData.notifications
     : [];
 
-  const isEmpty = !initialList.length > 0;
-
   const initialItemsList = initialList.map((d) => {
     const item = itemList.find((i) => i.id === d.id);
     return { name: item.name, id: item.id };
@@ -21,11 +19,19 @@ function NotificationAutocomplete({ itemList, initialData }) {
 
   const [selectedItems, setSelectedItems] = useState(initialItemsList);
 
+  const isEmpty = !(selectedItems.length > 0);
+
   function selectItem(value) {
-    const itemSelected = selectedItems.find((item) => item.id === value.id);
-    if ((value !== null, !itemSelected)) {
-      setSelectedItems([...selectedItems, { name: value.name, id: value.id }]);
+    if (value === null) {
+      return;
     }
+
+    const itemSelected = selectedItems.find((item) => item.id === value.id);
+
+    if (itemSelected) {
+      return;
+    }
+    setSelectedItems([...selectedItems, { name: value.name, id: value.id }]);
   }
 
   function deleteItem(id) {
