@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import * as Yup from 'yup';
 
@@ -42,7 +42,10 @@ export default function WatcherForm({ open, onClose, initialData }) {
           <Input name="name" type="text" label="Name" variant="outlined" />
           <Input name="url" type="text" label="URL" variant="outlined" />
           <Input name="delay" type="text" label="Interval" variant="outlined" />
-          <NotificationAutocomplete itemList={notificationsList} />
+          <NotificationAutocomplete
+            itemList={notificationsList}
+            initialData={initialData}
+          />
           <Button type="submit" color="primary">
             Save
           </Button>

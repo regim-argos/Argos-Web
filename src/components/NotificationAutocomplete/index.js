@@ -7,24 +7,37 @@ import StyledButton from '../RoundButton';
 
 import { ItemList, Item, HiddenInput, ButtonContainer } from './styles';
 
-function NotificationAutocomplete({ itemList, name, path, ...rest }) {
-  const [selectedItems, setSelectedItems] = useState([]);
+function NotificationAutocomplete({ itemList, initialData }) {
+  const initialList = initialData.notifications
+    ? initialData.notifications
+    : [];
 
-  async function selectItem(value) {
-    if (value !== null) {
-      await setSelectedItems([
-        ...selectedItems,
-        { itemName: value.name, id: value.id },
-      ]);
+  const isEmpty = !initialList.length > 0;
+
+  const initialItemsList = initialList.map((d) => {
+    const item = itemList.find((i) => i.id === d.id);
+    return { name: item.name, id: item.id };
+  });
+
+  const [selectedItems, setSelectedItems] = useState(initialItemsList);
+
+  function selectItem(value) {
+    const itemSelected = selectedItems.find((item) => item.id === value.id);
+    if ((value !== null, !itemSelected)) {
+      setSelectedItems([...selectedItems, { name: value.name, id: value.id }]);
     }
+  }
+
+  function deleteItem(id) {
+    setSelectedItems(selectedItems.filter((i) => i.id !== id));
   }
 
   return (
     <>
-      <ItemList>
+      <ItemList isEmpty={isEmpty}>
         {selectedItems.map((item, index) => (
           <Item key={item.id}>
-            <span>{item.itemName}</span>
+            <span>{item.name}</span>
             <HiddenInput
               name={`notifications[${index}].id`}
               type="hidden"
@@ -32,7 +45,11 @@ function NotificationAutocomplete({ itemList, name, path, ...rest }) {
               value={item.id}
             />
             <ButtonContainer>
-              <StyledButton Icon={MdDelete} color="#C5474B" />
+              <StyledButton
+                Icon={MdDelete}
+                color="#C5474B"
+                onClick={() => deleteItem(item.id)}
+              />
             </ButtonContainer>
           </Item>
         ))}
