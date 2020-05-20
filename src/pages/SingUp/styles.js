@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Button } from '@material-ui/core';
 import Form from '~/components/Form';
+import theme from '~/styles/theme';
 
 export const FormStyled = styled(Form)`
   display: flex;
@@ -25,7 +26,7 @@ export const FormStyled = styled(Form)`
         font-family: roboto;
         font-size: 17px;
         font-weight: 700;
-        color: #1089ff;
+        color: ${theme.palette.primary.main};
         opacity: 0.8;
         transition: 0.3s;
       }

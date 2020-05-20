@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { darken } from 'polished';
+import theme from './theme';
 
 export default createGlobalStyle`
   .regim-options{
@@ -25,7 +26,7 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
   body {
-    background: #23374D;
+    background: ${theme.palette.lightGrayColor.main};
     -webkit-font-smoothing: antialiased;
   }
   body, input, button, textarea {

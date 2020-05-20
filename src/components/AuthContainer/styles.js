@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '~/styles/theme';
 
 export const Container = styled.div`
   height: 100vh;
@@ -13,7 +14,7 @@ export const Container = styled.div`
     border-radius: 10px;
     padding: 25px;
     > h1 {
-      color: #1089ff;
+      color: ${theme.palette.primary.main};
       font-family: lato;
       font-size: 55px;
       text-align: center;
