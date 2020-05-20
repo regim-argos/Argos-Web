@@ -13,6 +13,8 @@ export const Container = styled.div`
     background-color: #eee;
     border-radius: 10px;
     padding: 25px;
+    box-shadow: 0px 0px 20px 0px rgba(204, 204, 204, 1);
+
     > h1 {
       color: ${theme.palette.primary.main};
       font-family: lato;

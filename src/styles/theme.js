@@ -4,12 +4,18 @@ export default createMuiTheme({
   palette: {
     primary: {
       main: '#0852BC',
+      secundary: '#6081F5',
     },
-    error: {
-      main: '#321',
-    },
+
     lightGrayColor: {
       main: '#E5E5E5',
+    },
+    lightWhiteColor: {
+      main: '#EEEEEE',
+    },
+
+    lightPurpleColor: {
+      main: '#512DA8',
     },
   },
 });
