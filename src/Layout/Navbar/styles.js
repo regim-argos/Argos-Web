@@ -9,6 +9,16 @@ export const NavContainer = styled.nav`
   justify-content: space-between;
   align-items: center;
   background-color: ${theme.palette.primary.main};
+  > div {
+    display: flex;
+    > img {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.3);
+      margin-right: 10px;
+    }
+  }
 `;
 
 export const LogoContainer = styled.div`

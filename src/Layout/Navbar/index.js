@@ -17,11 +17,17 @@ export default function Navbar() {
         <img src={ArgosLog} alt="ArgosLog" />
         <h1>Argos</h1>
       </LogoContainer>
-      <StyledButton
-        Icon={MdExitToApp}
-        color="#C5474B"
-        onClick={() => dispatch(signOut())}
-      />
+      <div>
+        <img
+          src="https://ui-avatars.com/api/?name=Diogo+MAchado&background=0D8ABC&color=fff&rounded=true&bold=true&size=128"
+          alt="profile"
+        />
+        <StyledButton
+          Icon={MdExitToApp}
+          color="#C5474B"
+          onClick={() => dispatch(signOut())}
+        />
+      </div>
     </NavContainer>
   );
 }
