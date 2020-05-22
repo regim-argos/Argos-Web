@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
-import { MdDelete } from 'react-icons/md';
+import { MdClose } from 'react-icons/md';
 import StyledButton from '../RoundButton';
 
 import { ItemList, Item, HiddenInput, ButtonContainer } from './styles';
@@ -32,7 +32,7 @@ function NotificationAutocomplete({ itemList, name, path, ...rest }) {
               value={item.id}
             />
             <ButtonContainer>
-              <StyledButton Icon={MdDelete} color="#C5474B" />
+              <StyledButton Icon={MdClose} color="#C5474B" />
             </ButtonContainer>
           </Item>
         ))}

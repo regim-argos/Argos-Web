@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import * as Yup from 'yup';
 
-import { Button } from '@material-ui/core';
+import { Button, Fade } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import Input from '../../../components/Input';
 import NotificationAutocomplete from '../../../components/NotificationAutocomplete';
@@ -30,24 +30,31 @@ export default function WatcherForm({ open, onClose, initialData }) {
 
   return (
     <WatcherFormModal open={open} onClose={onClose}>
-      <div id="watcherForm">
-        <Form
-          initialData={initialData}
-          schema={schema}
-          submitFunction={(data) => {
-            dispatch(watchersSaveRequest(data));
-          }}
-        >
-          <Input name="id" type="hidden" variant="outlined" />
-          <Input name="name" type="text" label="Name" variant="outlined" />
-          <Input name="url" type="text" label="URL" variant="outlined" />
-          <Input name="delay" type="text" label="Interval" variant="outlined" />
-          <NotificationAutocomplete itemList={notificationsList} />
-          <Button type="submit" color="primary">
-            Save
-          </Button>
-        </Form>
-      </div>
+      <Fade in={open}>
+        <div id="watcherForm">
+          <Form
+            initialData={initialData}
+            schema={schema}
+            submitFunction={(data) => {
+              dispatch(watchersSaveRequest(data));
+            }}
+          >
+            <Input name="id" type="hidden" variant="outlined" />
+            <Input name="name" type="text" label="Name" variant="outlined" />
+            <Input name="url" type="text" label="URL" variant="outlined" />
+            <Input
+              name="delay"
+              type="text"
+              label="Interval"
+              variant="outlined"
+            />
+            <NotificationAutocomplete itemList={notificationsList} />
+            <Button type="submit" color="primary">
+              Save
+            </Button>
+          </Form>
+        </div>
+      </Fade>
     </WatcherFormModal>
   );
 }

@@ -29,10 +29,12 @@ export default function watcher(state = INITIAL_STATE, action) {
       }
       case '@watcher/OPEN_MODAL': {
         draft.openModal = true;
+        draft.loading = false;
         break;
       }
       case '@watcher/CLOSE_MODAL': {
         draft.openModal = false;
+        draft.loading = false;
         break;
       }
 

@@ -52,7 +52,9 @@ export default function Watchers() {
           <StyledButton
             Icon={MdAdd}
             color="#6081F5"
-            onClick={() => dispatch(watcherOpenModal())}
+            onClick={() => {
+              dispatch(watcherOpenModal());
+            }}
           />
         </div>
         <ul>
@@ -67,7 +69,9 @@ export default function Watchers() {
           ))}
         </ul>
       </Container>
+
       <Loading loading={loading} />
+
       <WatcherFormModal
         initialData={editWatcher}
         open={open}
