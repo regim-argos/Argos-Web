@@ -11,7 +11,7 @@ export const NavContainer = styled.nav`
   background-color: ${theme.palette.primary.main};
   > div {
     display: flex;
-    > img {
+    > img:last-child {
       width: 35px;
       height: 35px;
       border-radius: 50%;
