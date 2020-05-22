@@ -9,9 +9,9 @@ export const NavContainer = styled.nav`
   justify-content: space-between;
   align-items: center;
   background-color: ${theme.palette.primary.main};
-  > div {
+  > div:nth-child(2) {
     display: flex;
-    > img:last-child {
+    > img {
       width: 35px;
       height: 35px;
       border-radius: 50%;
