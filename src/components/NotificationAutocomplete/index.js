@@ -10,14 +10,17 @@ import { ItemList, Item, HiddenInput, ButtonContainer } from './styles';
 function NotificationAutocomplete({ itemList, name, path, ...rest }) {
   const [selectedItems, setSelectedItems] = useState([]);
 
-  async function selectItem(value) {
+  function selectItem(value) {
     if (value !== null) {
-      await setSelectedItems([
+      setSelectedItems([
         ...selectedItems,
         { itemName: value.name, id: value.id },
       ]);
     }
   }
+  const handleDeleteItem = (id) => {
+    setSelectedItems(selectedItems.filter((item) => item.id !== id));
+  };
 
   return (
     <>
@@ -32,7 +35,11 @@ function NotificationAutocomplete({ itemList, name, path, ...rest }) {
               value={item.id}
             />
             <ButtonContainer>
-              <StyledButton Icon={MdClose} color="#C5474B" />
+              <StyledButton
+                Icon={MdClose}
+                color="#C5474B"
+                onClick={() => handleDeleteItem(item.id)}
+              />
             </ButtonContainer>
           </Item>
         ))}
