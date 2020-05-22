@@ -45,10 +45,13 @@ export default function WatcherForm({ open, onClose, initialData }) {
             <Input
               name="delay"
               type="text"
-              label="Interval"
+              label="Interval in seconds"
               variant="outlined"
             />
-            <NotificationAutocomplete itemList={notificationsList} />
+            <NotificationAutocomplete
+              itemList={notificationsList}
+              defaultItemValue={initialData.notifications}
+            />
             <Button type="submit" color="primary">
               Save
             </Button>

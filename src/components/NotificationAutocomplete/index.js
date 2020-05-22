@@ -7,8 +7,14 @@ import StyledButton from '../RoundButton';
 
 import { ItemList, Item, HiddenInput, ButtonContainer } from './styles';
 
-function NotificationAutocomplete({ itemList, name, path, ...rest }) {
-  const [selectedItems, setSelectedItems] = useState([]);
+function NotificationAutocomplete({
+  itemList,
+  name,
+  path,
+  defaultItemValue = [],
+  ...rest
+}) {
+  const [selectedItems, setSelectedItems] = useState(defaultItemValue);
 
   function selectItem(value) {
     if (value !== null) {
@@ -21,6 +27,7 @@ function NotificationAutocomplete({ itemList, name, path, ...rest }) {
   const handleDeleteItem = (id) => {
     setSelectedItems(selectedItems.filter((item) => item.id !== id));
   };
+  console.log(defaultItemValue);
 
   return (
     <>
