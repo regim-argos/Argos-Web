@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '~/styles/theme';
 
 export const NavContainer = styled.nav`
   height: 60px;
@@ -7,7 +8,7 @@ export const NavContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #1a2b3d;
+  background-color: ${theme.palette.primary.main};
 `;
 
 export const LogoContainer = styled.div`

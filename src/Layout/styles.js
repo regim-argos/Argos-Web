@@ -16,21 +16,5 @@ export const Box = styled.div`
   background-color: #121f2b;
   display: flex;
   flex-direction: column;
+  box-shadow: 0px 0px 20px 0px rgba(204, 204, 204, 1);
 `;
-
-// export const Watcher = styled.div`
-
-//   display: flex;
-//   padding: 20px 50px;
-//   flex-direction: column;
-//   height: 100%;
-//   > div {
-//     display: flex;
-//     justify-content: flex-end;
-//   }
-//   > ul {
-//     display: flex;
-//     flex-direction: column;
-//     margin-top: 20px;
-//   }
-// `;
