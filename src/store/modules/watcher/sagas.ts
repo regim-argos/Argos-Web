@@ -46,7 +46,7 @@ export function* watchersDelete({ payload }: Action) {
     yield put(watchersDeleteSuccess());
     yield put(watchersRequest());
   } catch (err) {
-    toast.error("Error, can't delete");
+    toast.error("Error, can't delete this watcher");
     yield put(watchersFailure());
   }
 }

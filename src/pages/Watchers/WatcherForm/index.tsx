@@ -1,19 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import * as Yup from 'yup';
 
 import { Button } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
 import Form from 'components/Form';
 import { watchersSaveRequest } from 'store/modules/watcher/actions';
 import IWatcher from 'Types/IWatcher';
+import { useDispatch, useSelector } from 'react-redux';
 import Input from '../../../components/Input';
+import NotificationAutocomplete from '../../../components/NotificationAutocomplete';
 import { WatcherFormModal } from './styles';
+import { notificationsRequest } from 'store/modules/notifications/actions';
+import ArgosReduxStates from 'Types/ArgosReduxStates';
+import INotification from 'Types/INotification';
 
 const schema = Yup.object().shape({
   name: Yup.string().trim().required(),
   url: Yup.string().url().trim().required(),
   delay: Yup.number().integer().min(10, 'must be greater than or equal to 10'),
+  notifications: Yup.array().of(Yup.object().shape({ id: Yup.number() })),
 });
 
 interface WatcherFormProps {
@@ -28,6 +33,13 @@ export default function WatcherForm({
   initialData,
 }: WatcherFormProps) {
   const dispatch = useDispatch();
+  const notificationsList = useSelector<ArgosReduxStates, INotification[]>(
+    (state) => state.notification.notifications
+  );
+
+  useEffect(() => {
+    dispatch(notificationsRequest());
+  }, [dispatch]);
 
   return (
     <WatcherFormModal open={open} onClose={onClose}>
@@ -43,6 +55,10 @@ export default function WatcherForm({
           <Input name="name" type="text" label="Name" variant="outlined" />
           <Input name="url" type="text" label="URL" variant="outlined" />
           <Input name="delay" type="text" label="Interval" variant="outlined" />
+          <NotificationAutocomplete
+            itemList={notificationsList}
+            initialData={initialData}
+          />
           <Button type="submit" color="primary">
             Save
           </Button>

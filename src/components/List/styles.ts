@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+import theme from '~/styles/theme';
 
 export const WatcherList = styled.li`
   padding: 10px 5px;
-  background-color: #0852bc;
+  background-color: ${theme.palette.primary.main};
   border-radius: 30px;
 
   list-style: none;

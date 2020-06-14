@@ -1,28 +1,21 @@
 import React from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
 
-import { NavMenuContainer, NavButton } from './styles';
+import { NavMenuContainer, NavTab } from './styles';
 
 export default function NavigationMenu() {
-  const SelectedTab = useLocation().pathname === '/watchers';
-  const history = useHistory();
+  function NavTabBar({ tabName, to }) {
+    return (
+      <NavTab to={to}>
+        <strong>{tabName}</strong>
+        <div />
+      </NavTab>
+    );
+  }
 
   return (
     <NavMenuContainer>
-      <NavButton
-        a={SelectedTab}
-        type="button"
-        onClick={() => history.push('/watchers')}
-      >
-        Watchers
-      </NavButton>
-      <NavButton
-        a={!SelectedTab}
-        type="button"
-        onClick={() => history.push('/notifications')}
-      >
-        Notification
-      </NavButton>
+      <NavTabBar tabName="Watchers" to="/watchers" />
+      <NavTabBar tabName="Notifications" to="/notifications" />
     </NavMenuContainer>
   );
 }
