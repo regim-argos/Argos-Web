@@ -3,17 +3,26 @@ import React, { useState } from 'react';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { MdDelete } from 'react-icons/md';
+import INotification from 'Types/INotification';
+import IWatcher from 'Types/IWatcher';
 import StyledButton from '../RoundButton';
 
 import { ItemList, Item, HiddenInput, ButtonContainer } from './styles';
 
-function NotificationAutocomplete({ itemList, initialData }) {
+function NotificationAutocomplete({
+  itemList,
+  initialData,
+}: {
+  itemList: INotification[];
+  initialData: IWatcher;
+}) {
   const initialList = initialData.notifications
     ? initialData.notifications
     : [];
 
   const initialItemsList = initialList.map((d) => {
     const item = itemList.find((i) => i.id === d.id);
+    if (!item) throw new Error('not found');
     return { name: item.name, id: item.id };
   });
 
@@ -21,7 +30,7 @@ function NotificationAutocomplete({ itemList, initialData }) {
 
   const isEmpty = !(selectedItems.length > 0);
 
-  function selectItem(value) {
+  function selectItem(value: INotification) {
     if (value === null) {
       return;
     }
@@ -34,7 +43,7 @@ function NotificationAutocomplete({ itemList, initialData }) {
     setSelectedItems([...selectedItems, { name: value.name, id: value.id }]);
   }
 
-  function deleteItem(id) {
+  function deleteItem(id: number) {
     setSelectedItems(selectedItems.filter((i) => i.id !== id));
   }
 
@@ -61,8 +70,9 @@ function NotificationAutocomplete({ itemList, initialData }) {
         ))}
       </ItemList>
       <Autocomplete
-        label="Notification"
-        onChange={(e, v) => selectItem(v)}
+        onChange={(e, v) => {
+          if (v) selectItem(v);
+        }}
         options={itemList}
         getOptionLabel={(item) => item.name}
         renderInput={(params) => (

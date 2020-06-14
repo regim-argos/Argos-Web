@@ -20,7 +20,7 @@ import WatcherFormModal from './WatcherForm';
 
 export default function Watchers() {
   const dispatch = useDispatch();
-  const [editWatcher, setEditWatcher] = useState({});
+  const [editWatcher, setEditWatcher] = useState<IWatcher>();
   const open = useSelector<ArgosReduxStates, boolean>(
     (state) => state.watcher.openModal
   );
@@ -50,7 +50,7 @@ export default function Watchers() {
   function closeModal() {
     dispatch(watcherCloseModal());
 
-    setEditWatcher({});
+    setEditWatcher(undefined);
   }
 
   return (
@@ -76,11 +76,13 @@ export default function Watchers() {
         </ul>
       </Container>
       <Loading loading={loading} />
-      <WatcherFormModal
-        initialData={editWatcher}
-        open={open}
-        onClose={closeModal}
-      />
+      {editWatcher && (
+        <WatcherFormModal
+          initialData={editWatcher}
+          open={open}
+          onClose={closeModal}
+        />
+      )}
     </>
   );
 }

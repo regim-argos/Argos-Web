@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import Input from '../Input';
 
-export const ItemList = styled.ul`
+export const ItemList = styled.ul<{ isEmpty: boolean }>`
   list-style: none;
   display: flex;
   margin-bottom: 20px;

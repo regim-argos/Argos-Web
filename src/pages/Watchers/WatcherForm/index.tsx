@@ -7,12 +7,12 @@ import Form from 'components/Form';
 import { watchersSaveRequest } from 'store/modules/watcher/actions';
 import IWatcher from 'Types/IWatcher';
 import { useDispatch, useSelector } from 'react-redux';
-import Input from '../../../components/Input';
-import NotificationAutocomplete from '../../../components/NotificationAutocomplete';
-import { WatcherFormModal } from './styles';
 import { notificationsRequest } from 'store/modules/notifications/actions';
 import ArgosReduxStates from 'Types/ArgosReduxStates';
 import INotification from 'Types/INotification';
+import Input from '../../../components/Input';
+import NotificationAutocomplete from '../../../components/NotificationAutocomplete';
+import { WatcherFormModal } from './styles';
 
 const schema = Yup.object().shape({
   name: Yup.string().trim().required(),
@@ -24,7 +24,7 @@ const schema = Yup.object().shape({
 interface WatcherFormProps {
   open: boolean;
   onClose: () => void;
-  initialData: IWatcher | {};
+  initialData: IWatcher;
 }
 
 export default function WatcherForm({

@@ -3,7 +3,7 @@ import React from 'react';
 import { NavMenuContainer, NavTab } from './styles';
 
 export default function NavigationMenu() {
-  function NavTabBar({ tabName, to }) {
+  function NavTabBar({ tabName, to }: { tabName: string; to: string }) {
     return (
       <NavTab to={to}>
         <strong>{tabName}</strong>

@@ -2,9 +2,9 @@ import React from 'react';
 
 import { MdExitToApp } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
-import ArgosLog from '~/assets/Ativo-5.svg';
-import StyledButton from '../../components/RoundButton';
+import ArgosLog from 'assets/Ativo-5.svg';
 import { signOut } from 'store/modules/auth/actions';
+import StyledButton from '../../components/RoundButton';
 
 import { NavContainer, LogoContainer } from './styles';
 

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import theme from '~/styles/theme';
+import theme from 'styles/theme';
 
 export const Container = styled(PerfectScrollbar)`
   display: flex;
