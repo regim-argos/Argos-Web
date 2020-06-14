@@ -2,57 +2,35 @@ import React, { useState } from 'react';
 
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
-import { MdDelete } from 'react-icons/md';
+import { MdClose } from 'react-icons/md';
 import INotification from 'Types/INotification';
-import IWatcher from 'Types/IWatcher';
 import StyledButton from '../RoundButton';
 
 import { ItemList, Item, HiddenInput, ButtonContainer } from './styles';
 
-function NotificationAutocomplete({
-  itemList,
-  initialData,
-}: {
-  itemList: INotification[];
-  initialData: IWatcher;
-}) {
-  const initialList = initialData.notifications
-    ? initialData.notifications
-    : [];
+function NotificationAutocomplete({ itemList }: { itemList: INotification[] }) {
+  const [selectedItems, setSelectedItems] = useState<
+    {
+      itemName: string;
+      id: number;
+    }[]
+  >([]);
 
-  const initialItemsList = initialList.map((d) => {
-    const item = itemList.find((i) => i.id === d.id);
-    if (!item) throw new Error('not found');
-    return { name: item.name, id: item.id };
-  });
-
-  const [selectedItems, setSelectedItems] = useState(initialItemsList);
-
-  const isEmpty = !(selectedItems.length > 0);
-
-  function selectItem(value: INotification) {
-    if (value === null) {
-      return;
+  async function selectItem(value: INotification) {
+    if (value !== null) {
+      setSelectedItems([
+        ...selectedItems,
+        { itemName: value.name, id: value.id },
+      ]);
     }
-
-    const itemSelected = selectedItems.find((item) => item.id === value.id);
-
-    if (itemSelected) {
-      return;
-    }
-    setSelectedItems([...selectedItems, { name: value.name, id: value.id }]);
-  }
-
-  function deleteItem(id: number) {
-    setSelectedItems(selectedItems.filter((i) => i.id !== id));
   }
 
   return (
     <>
-      <ItemList isEmpty={isEmpty}>
+      <ItemList>
         {selectedItems.map((item, index) => (
           <Item key={item.id}>
-            <span>{item.name}</span>
+            <span>{item.itemName}</span>
             <HiddenInput
               name={`notifications[${index}].id`}
               type="hidden"
@@ -60,11 +38,7 @@ function NotificationAutocomplete({
               value={item.id}
             />
             <ButtonContainer>
-              <StyledButton
-                Icon={MdDelete}
-                color="#C5474B"
-                onClick={() => deleteItem(item.id)}
-              />
+              <StyledButton Icon={MdClose} color="#C5474B" />
             </ButtonContainer>
           </Item>
         ))}

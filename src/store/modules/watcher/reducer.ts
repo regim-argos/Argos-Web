@@ -48,10 +48,12 @@ export default function watcher(
       }
       case '@watcher/OPEN_MODAL': {
         draft.openModal = true;
+        draft.loading = false;
         break;
       }
       case '@watcher/CLOSE_MODAL': {
         draft.openModal = false;
+        draft.loading = false;
         break;
       }
 

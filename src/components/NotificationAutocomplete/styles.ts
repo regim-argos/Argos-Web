@@ -1,19 +1,13 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import Input from '../Input';
 
-export const ItemList = styled.ul<{ isEmpty: boolean }>`
+export const ItemList = styled.ul`
   list-style: none;
   display: flex;
   margin-bottom: 20px;
   max-height: 120px;
   overflow: auto;
   flex-direction: column;
-
-  ${(props) =>
-    props.isEmpty &&
-    css`
-      margin-bottom: 0px;
-    `}
 `;
 export const Item = styled.li`
   display: flex;
