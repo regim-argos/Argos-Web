@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Loading from 'components/Loading';
 import ArgosReduxStates from 'Types/ArgosReduxStates';
 import INotification from 'Types/INotification';
+import { useParams } from 'react-router-dom';
 import StyledButton from '../../components/RoundButton';
 import { Container } from './styles';
 import NotificationList from '../../components/NotificationList';
@@ -17,6 +18,8 @@ import {
 } from '../../store/modules/notifications/actions';
 
 export default function Notifications() {
+  const { projectId } = useParams();
+
   const dispatch = useDispatch();
   const [editNotification, setNotification] = useState<INotification | {}>({});
   const notifications = useSelector<ArgosReduxStates, INotification[]>(
@@ -30,8 +33,8 @@ export default function Notifications() {
   );
 
   useEffect(() => {
-    dispatch(notificationsRequest());
-  }, [dispatch]);
+    dispatch(notificationsRequest(projectId));
+  }, [dispatch, projectId]);
 
   function handleEditNotification(notification: INotification) {
     setNotification(notification);
@@ -39,7 +42,7 @@ export default function Notifications() {
   }
 
   function handleDelete(id: number) {
-    dispatch(notificationDelete(id));
+    dispatch(notificationDelete(id, projectId));
   }
 
   function openModal() {
@@ -50,7 +53,7 @@ export default function Notifications() {
     setNotification({});
   }
   function handleSave(notification: INotification) {
-    dispatch(notificationSaveRequest(notification));
+    dispatch(notificationSaveRequest(notification, projectId));
   }
 
   return (

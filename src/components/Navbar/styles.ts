@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import theme from 'styles/theme';
 
 export const NavContainer = styled.nav`
-  height: 60px;
+  min-height: 60px;
   width: 100%;
-  padding: 5px 50px 0;
+  padding: 0 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -11,6 +11,7 @@ import { notificationsRequest } from 'store/modules/notifications/actions';
 import ArgosReduxStates from 'Types/ArgosReduxStates';
 import INotification from 'Types/INotification';
 import NotificationAutocomplete from 'components/NotificationAutocomplete';
+import { useParams } from 'react-router-dom';
 import Input from '../../../components/Input';
 import { WatcherFormModal } from './styles';
 
@@ -24,7 +25,7 @@ const schema = Yup.object().shape({
 interface WatcherFormProps {
   open: boolean;
   onClose: () => void;
-  initialData: IWatcher;
+  initialData?: IWatcher;
 }
 
 export default function WatcherForm({
@@ -32,14 +33,16 @@ export default function WatcherForm({
   onClose,
   initialData,
 }: WatcherFormProps) {
+  const { projectId } = useParams();
+
   const dispatch = useDispatch();
   const notificationsList = useSelector<ArgosReduxStates, INotification[]>(
     (state) => state.notification.notifications
   );
 
   useEffect(() => {
-    dispatch(notificationsRequest());
-  }, [dispatch]);
+    dispatch(notificationsRequest(projectId));
+  }, [dispatch, projectId]);
 
   return (
     <WatcherFormModal open={open} onClose={onClose}>
@@ -49,7 +52,7 @@ export default function WatcherForm({
             initialData={initialData}
             schema={schema}
             submitFunction={(data: IWatcher) => {
-              dispatch(watchersSaveRequest(data));
+              dispatch(watchersSaveRequest(data, projectId));
             }}
           >
             <Input name="id" type="hidden" variant="outlined" />
@@ -63,7 +66,7 @@ export default function WatcherForm({
             />
             <NotificationAutocomplete
               itemList={notificationsList}
-              defaultItemValue={initialData.notifications}
+              defaultItemValue={initialData?.notifications || []}
             />
             <Button type="submit" color="primary">
               Save

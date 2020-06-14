@@ -1,8 +1,9 @@
 import IWatcher from 'Types/IWatcher';
 
-export function watchersRequest() {
+export function watchersRequest(projectId: number) {
   return {
     type: '@watcher/WATCHERS_REQUEST',
+    payload: { projectId },
   };
 }
 
@@ -19,10 +20,10 @@ export function watchersFailure() {
   };
 }
 
-export function watchersDelete(id: number) {
+export function watchersDelete(id: number, projectId: number) {
   return {
     type: '@watcher/WATCHERS_DELETE',
-    payload: { id },
+    payload: { id, projectId },
   };
 }
 
@@ -32,10 +33,10 @@ export function watchersDeleteSuccess() {
   };
 }
 
-export function watchersSaveRequest(watcher: IWatcher) {
+export function watchersSaveRequest(watcher: IWatcher, projectId: number) {
   return {
     type: '@watcher/WATCHERS_SAVE_RESQUEST',
-    payload: { watcher },
+    payload: { watcher, projectId },
   };
 }
 export function watchersSaveSuccess() {

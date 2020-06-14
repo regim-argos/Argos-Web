@@ -2,7 +2,6 @@
 import React, { FC } from 'react';
 import { Route, Redirect, RouteProps } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Layout from 'Layout';
 import ArgosReduxStates from 'Types/ArgosReduxStates';
 
 interface IRoutes extends RouteProps {
@@ -26,20 +25,9 @@ export default function RouteWrapper({
   }
 
   if (signed && !isPrivate) {
-    return <Redirect to="/watchers" />;
+    return <Redirect to="/project" />;
   }
 
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        isPrivate ? (
-          <Layout Component={Component} {...props} />
-        ) : (
-          // @ts-ignore
-          <Component {...props} />
-        )
-      }
-    />
-  );
+  // @ts-ignore
+  return <Route {...rest} render={(props) => <Component {...props} />} />;
 }

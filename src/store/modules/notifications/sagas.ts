@@ -22,15 +22,16 @@ const takeLatest: any = sagaTakelastest;
 interface Action {
   payload: {
     id: number;
+    projectId: number;
     notification: {
       id: number;
     };
   };
 }
 
-export function* getNotifications() {
+export function* getNotifications({ payload: { projectId } }: Action) {
   try {
-    const response = yield call(api.get, 'notifications');
+    const response = yield call(api.get, `${projectId}/notifications`);
 
     yield put(notificationSuccess(response.data));
   } catch (err) {
@@ -39,32 +40,34 @@ export function* getNotifications() {
   }
 }
 
-export function* deleteNotifications({ payload }: Action) {
+export function* deleteNotifications({ payload: { id, projectId } }: Action) {
   try {
-    yield call(api.delete, `notifications/${payload.id}`);
+    yield call(api.delete, `${projectId}/notifications/${id}`);
 
     yield put(notificationDeleteSuccess());
-    yield put(notificationsRequest());
+    yield put(notificationsRequest(projectId));
   } catch (err) {
     toast.error("Error, can't find notifications");
     yield put(notificationsFaliure());
   }
 }
-export function* saveNotifications({ payload }: Action) {
+export function* saveNotifications({
+  payload: { projectId, notification },
+}: Action) {
   try {
-    if (payload.notification.id) {
+    if (notification.id) {
       yield call(
         api.put,
-        `notifications/${payload.notification.id}`,
-        payload.notification
+        `${projectId}/notifications/${notification.id}`,
+        notification
       );
     } else {
-      yield call(api.post, 'notifications', payload.notification);
+      yield call(api.post, `${projectId}/notifications`, notification);
     }
 
     yield put(notificationSaveSuccess());
     yield put(notificationCloseModal());
-    yield put(notificationsRequest());
+    yield put(notificationsRequest(projectId));
   } catch (err) {
     toast.error("Error, can't find notifications");
     yield put(notificationSaveFaliure());

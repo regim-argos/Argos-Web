@@ -1,7 +1,6 @@
 import React from 'react';
 import { Switch, Redirect } from 'react-router-dom';
-import Watchers from 'pages/Watchers';
-import Notifications from 'pages/Notifications';
+import Project from 'pages/Project';
 import Route from './Route';
 
 import SignIn from '../pages/SingIn';
@@ -12,8 +11,7 @@ export default function Routes() {
     <Switch>
       <Route path="/" exact Component={SignIn} />
       <Route path="/register" Component={SignUp} />
-      <Route path="/watchers" exact Component={Watchers} isPrivate />
-      <Route path="/notifications" exact Component={Notifications} isPrivate />
+      <Route path="/project" isPrivate Component={Project} />
       <Route path="/*" Component={() => <Redirect to="/" />} />
     </Switch>
   );

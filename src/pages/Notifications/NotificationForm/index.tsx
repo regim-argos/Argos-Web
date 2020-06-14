@@ -7,6 +7,7 @@ import Form from 'components/Form';
 import SelectInput from 'components/SelectInput';
 import { notificationSaveRequest } from 'store/modules/notifications/actions';
 import INotification from 'Types/INotification';
+import { useParams } from 'react-router-dom';
 import Input from '../../../components/Input';
 
 import { NotificationFormModal } from './styles';
@@ -30,6 +31,8 @@ export default function NotificationForm({
   onClose,
   initialData,
 }: NotificationFormProps) {
+  const { projectId } = useParams();
+
   const dispatch = useDispatch();
   return (
     <NotificationFormModal open={open} onClose={onClose}>
@@ -38,7 +41,7 @@ export default function NotificationForm({
           initialData={initialData}
           schema={schema}
           submitFunction={(data: INotification) => {
-            dispatch(notificationSaveRequest(data));
+            dispatch(notificationSaveRequest(data, projectId));
           }}
         >
           <Input name="id" type="hidden" variant="outlined" />

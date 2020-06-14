@@ -1,8 +1,9 @@
 import INotification from 'Types/INotification';
 
-export function notificationsRequest() {
+export function notificationsRequest(projectId: number) {
   return {
     type: '@notification/NOTIFICATIONS_REQUEST',
+    payload: { projectId },
   };
 }
 
@@ -19,10 +20,10 @@ export function notificationsFaliure() {
   };
 }
 
-export function notificationDelete(id: number) {
+export function notificationDelete(id: number, projectId: number) {
   return {
     type: '@notification/NOTIFICATIONS_DELETE',
-    payload: { id },
+    payload: { id, projectId },
   };
 }
 export function notificationDeleteSuccess() {
@@ -42,10 +43,13 @@ export function notificationCloseModal() {
     type: '@notification/CLOSE_MODAL',
   };
 }
-export function notificationSaveRequest(notification: INotification) {
+export function notificationSaveRequest(
+  notification: INotification,
+  projectId: number
+) {
   return {
     type: '@notification/NOTIFICATIONS_SAVE_RESQUEST',
-    payload: { notification },
+    payload: { notification, projectId },
   };
 }
 export function notificationSaveSuccess() {

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { useRouteMatch } from 'react-router-dom';
 import { NavMenuContainer, NavTab } from './styles';
 
 export default function NavigationMenu() {
@@ -11,11 +12,12 @@ export default function NavigationMenu() {
       </NavTab>
     );
   }
+  const { url } = useRouteMatch();
 
   return (
     <NavMenuContainer>
-      <NavTabBar tabName="Watchers" to="/watchers" />
-      <NavTabBar tabName="Notifications" to="/notifications" />
+      <NavTabBar tabName="Watchers" to={`${url}/watcher`} />
+      <NavTabBar tabName="Notifications" to={`${url}/notification`} />
     </NavMenuContainer>
   );
 }

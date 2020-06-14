@@ -22,15 +22,16 @@ const takeLatest: any = sagaTakelastest;
 interface Action {
   payload: {
     id: number;
+    projectId: number;
     watcher: {
       id: number;
     };
   };
 }
 
-export function* getWatchers() {
+export function* getWatchers({ payload: { projectId } }: Action) {
   try {
-    const response = yield call(api.get, 'watchers');
+    const response = yield call(api.get, `${projectId}/watchers`);
 
     yield put(watchersSuccess(response.data));
   } catch (err) {
@@ -39,29 +40,29 @@ export function* getWatchers() {
   }
 }
 
-export function* watchersDelete({ payload }: Action) {
+export function* watchersDelete({ payload: { id, projectId } }: Action) {
   try {
-    yield call(api.delete, `watchers/${payload.id}`);
+    yield call(api.delete, `${projectId}/watchers/${id}`);
 
     yield put(watchersDeleteSuccess());
-    yield put(watchersRequest());
+    yield put(watchersRequest(projectId));
   } catch (err) {
     toast.error("Error, can't delete this watcher");
     yield put(watchersFailure());
   }
 }
 
-export function* watchersSave({ payload }: Action) {
+export function* watchersSave({ payload: { projectId, watcher } }: Action) {
   try {
-    if (payload.watcher.id) {
-      yield call(api.put, `watchers/${payload.watcher.id}`, payload.watcher);
+    if (watcher.id) {
+      yield call(api.put, `${projectId}/watchers/${watcher.id}`, watcher);
     } else {
-      yield call(api.post, `watchers`, payload.watcher);
+      yield call(api.post, `${projectId}/watchers/`, watcher);
     }
 
     yield put(watchersSaveSuccess());
     yield put(watcherCloseModal());
-    yield put(watchersRequest());
+    yield put(watchersRequest(projectId));
   } catch (err) {
     toast.error(`Error, ${err.response.data.message}`);
     yield put(watchersSaveFaliure());

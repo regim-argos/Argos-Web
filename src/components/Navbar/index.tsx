@@ -4,8 +4,8 @@ import { MdExitToApp } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import ArgosLog from 'assets/Ativo-5.svg';
 import { signOut } from 'store/modules/auth/actions';
-import StyledButton from '../../components/RoundButton';
 
+import RoundButton from 'components/RoundButton';
 import { NavContainer, LogoContainer } from './styles';
 
 export default function Navbar() {
@@ -22,7 +22,7 @@ export default function Navbar() {
           src="https://ui-avatars.com/api/?name=Diogo+MAchado&background=0D8ABC&color=fff&rounded=true&bold=true&size=128"
           alt="profile"
         />
-        <StyledButton
+        <RoundButton
           Icon={MdExitToApp}
           color="#C5474B"
           onClick={() => dispatch(signOut())}
