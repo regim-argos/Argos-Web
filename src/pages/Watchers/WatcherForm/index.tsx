@@ -10,8 +10,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { notificationsRequest } from 'store/modules/notifications/actions';
 import ArgosReduxStates from 'Types/ArgosReduxStates';
 import INotification from 'Types/INotification';
+import NotificationAutocomplete from 'components/NotificationAutocomplete';
 import Input from '../../../components/Input';
-import NotificationAutocomplete from '../../../components/NotificationAutocomplete';
 import { WatcherFormModal } from './styles';
 
 const schema = Yup.object().shape({
@@ -58,10 +58,13 @@ export default function WatcherForm({
             <Input
               name="delay"
               type="text"
-              label="Interval"
+              label="Interval in seconds"
               variant="outlined"
             />
-            <NotificationAutocomplete itemList={notificationsList} />
+            <NotificationAutocomplete
+              itemList={notificationsList}
+              defaultItemValue={initialData.notifications}
+            />
             <Button type="submit" color="primary">
               Save
             </Button>
