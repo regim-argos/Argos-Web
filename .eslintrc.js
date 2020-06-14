@@ -1,5 +1,3 @@
-const { off } = require("process");
-
 module.exports = {
   extends: ['airbnb-typescript-prettier'],
   rules: {
