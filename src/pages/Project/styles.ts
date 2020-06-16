@@ -13,7 +13,6 @@ export const Box = styled.div`
   height: 100vh;
   max-width: 1200px;
   width: 100%;
-  background-color: #121f2b;
   display: flex;
   flex-direction: column;
   box-shadow: 0px 0px 20px 0px rgba(204, 204, 204, 1);

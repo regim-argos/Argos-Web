@@ -2,7 +2,7 @@ import React from 'react';
 import { MdEdit, MdDelete, MdPowerSettingsNew } from 'react-icons/md';
 
 import INotification from 'Types/INotification';
-import StyledButton from '../RoundButton';
+import RoundButton from 'components/RoundButton';
 import { NotificationList } from './styles';
 
 interface ListProps {
@@ -25,17 +25,17 @@ export default function List({
         <span>{name}</span>
       </div>
       <div>
-        <StyledButton
+        <RoundButton
           Icon={MdPowerSettingsNew}
           color={active ? '#44B04C' : '#9C9C9C'}
           onClick={() => handleSave({ ...notification, active: !active })}
         />
-        <StyledButton
+        <RoundButton
           Icon={MdEdit}
           color="#DEB23C"
           onClick={() => handleEditNotification(notification)}
         />
-        <StyledButton
+        <RoundButton
           Icon={MdDelete}
           color="#C5474B"
           onClick={() => handleDelete(id)}

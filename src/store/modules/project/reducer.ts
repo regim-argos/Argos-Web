@@ -5,12 +5,15 @@ const INITIAL_STATE = {
   projects: [],
   loading: false,
   openModal: false,
+  memberOpenModal: false,
 };
 
 export interface ProjectState {
   projects: IProject[];
   openModal: boolean;
   loading: boolean;
+  memberOpenModal: boolean;
+  currentProject?: IProject;
 }
 
 interface ProjectAction {
@@ -26,17 +29,28 @@ export default function project(
 ) {
   return produce(state, (draft) => {
     switch (action.type) {
-      case '@project/NOTIFICATIONS_REQUEST':
-      case '@project/NOTIFICATIONS_SAVE_RESQUEST':
+      case '@project/PROJECT_REQUEST':
+      case '@project/PROJECT_REQUEST_ONE':
+      case '@project/PROJECT_SAVE_RESQUEST':
+      case '@member/MEMBER_SAVE_RESQUEST':
+      case '@member/MEMBER_REMOVE_RESQUEST':
         draft.loading = true;
         break;
-      case '@project/NOTIFICATIONS_FALIURE':
-      case '@project/NOTIFICATIONS_SAVE_SUCCESS':
-      case '@project/NOTIFICATIONS_SAVE_FALIURE':
+      case '@project/PROJECT_FALIURE':
+      case '@project/PROJECT_SAVE_SUCCESS':
+      case '@project/PROJECT_SAVE_FALIURE':
+      case '@project/PROJECT_FALIURE_ONE':
+      case '@member/MEMBER_SAVE_SUCCESS':
+      case '@member/MEMBER_SAVE_FALIURE':
+      case '@member/MEMBER_REMOVE_SUCCESS':
+      case '@member/MEMBER_REMOVE_FALIURE':
         draft.loading = false;
         break;
-
-      case '@project/NOTIFICATIONS_SUCCESS':
+      case '@project/PROJECT_SUCCESS_ONE':
+        draft.loading = false;
+        draft.currentProject = action.payload.project;
+        break;
+      case '@project/PROJECT_SUCCESS':
         draft.loading = false;
         draft.projects = action.payload.projects;
         break;
@@ -45,6 +59,12 @@ export default function project(
         break;
       case '@project/CLOSE_MODAL':
         draft.openModal = false;
+        break;
+      case '@member/OPEN_MODAL':
+        draft.memberOpenModal = true;
+        break;
+      case '@member/CLOSE_MODAL':
+        draft.memberOpenModal = false;
         break;
 
       default:

@@ -1,20 +1,36 @@
-import React from 'react';
-import { Route, Redirect, useRouteMatch, Switch } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import {
+  Route,
+  Redirect,
+  useRouteMatch,
+  Switch,
+  useParams,
+} from 'react-router-dom';
 import Watchers from 'pages/Watchers';
 import Notifications from 'pages/Notifications';
 import NavigationMenu from 'components/NavigationMenu';
+import { useDispatch } from 'react-redux';
+import { projectRequestOne } from 'store/modules/project/actions';
+import ProjectUsers from 'pages/ProjectUsers';
 
 // import { Container } from './styles';
 
 const ProjectManagement: React.FC = () => {
   const { path, url } = useRouteMatch();
-  console.log(path, url);
+  const { projectId } = useParams();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(projectRequestOne(projectId));
+  }, [dispatch, projectId]);
 
   return (
     <>
       <NavigationMenu />
       <Switch>
         <Route component={Watchers} exact path={`${path}/watcher`} />
+        <Route component={ProjectUsers} exact path={`${path}/projectUsers`} />
         <Route component={Notifications} exact path={`${path}/notification`} />
         <Route
           component={() => <Redirect to={`${url}/watcher`} />}

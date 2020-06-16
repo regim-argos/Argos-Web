@@ -9,7 +9,7 @@ import {
 } from 'react-icons/md';
 
 import IWatcher from 'Types/IWatcher';
-import StyledButton from '../RoundButton';
+import RoundButton from 'components/RoundButton';
 import { WatcherList, StatusInfo } from './styles';
 
 interface ListProps {
@@ -41,19 +41,19 @@ export default function List({
 
       <div>
         <a href={url} target="_blank" rel="noopener noreferrer">
-          <StyledButton Icon={MdLink} color="#6081F5" />
+          <RoundButton Icon={MdLink} color="#6081F5" />
         </a>
-        <StyledButton
+        <RoundButton
           Icon={MdPowerSettingsNew}
           color={active ? '#44B04C' : '#9C9C9C'}
           onClick={() => handleSave({ ...watcher, active: !active })}
         />
-        <StyledButton
+        <RoundButton
           Icon={MdEdit}
           color="#DEB23C"
           onClick={() => handleChange(watcher)}
         />
-        <StyledButton
+        <RoundButton
           onClick={() => handleDelete(id)}
           Icon={MdDelete}
           color="#C5474B"

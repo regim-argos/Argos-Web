@@ -1,5 +1,6 @@
 import produce from 'immer';
 import IUser from 'Types/IUser';
+import IProject from 'Types/IProject';
 
 const INITIAL_STATE = {
   profile: null,
@@ -9,6 +10,7 @@ const INITIAL_STATE = {
 export interface UserState {
   profile: IUser | null;
   loading: boolean;
+  isOwner?: boolean;
 }
 
 interface UserAction {
@@ -16,6 +18,7 @@ interface UserAction {
   payload: {
     user: IUser | null;
     profile: IUser | null;
+    project: IProject;
   };
 }
 
@@ -31,6 +34,15 @@ export default function user(
       }
       case '@user/UPDATE_PROFILE_SUCCESS': {
         draft.profile = action.payload.profile;
+        break;
+      }
+      case '@project/PROJECT_SUCCESS_ONE': {
+        draft.isOwner = false;
+        const find = action.payload.project.members.find(
+          (member) =>
+            member.userId === draft.profile?.id && member.role === 'OWNER'
+        );
+        if (find) draft.isOwner = true;
         break;
       }
       case '@auth/SIGN_OUT': {

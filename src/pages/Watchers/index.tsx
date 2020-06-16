@@ -14,7 +14,7 @@ import ArgosReduxStates from 'Types/ArgosReduxStates';
 import IWatcher from 'Types/IWatcher';
 import { useParams } from 'react-router-dom';
 import StyledButton from '../../components/RoundButton';
-import WatcherList from '../../components/List';
+import WatcherList from './List';
 import { Container } from './styles';
 
 import WatcherFormModal from './WatcherForm';

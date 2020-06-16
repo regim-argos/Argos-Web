@@ -6,7 +6,7 @@ import INotification from 'Types/INotification';
 import { useParams } from 'react-router-dom';
 import StyledButton from '../../components/RoundButton';
 import { Container } from './styles';
-import NotificationList from '../../components/NotificationList';
+import NotificationList from './NotificationList';
 
 import NotificationFormModal from './NotificationForm';
 import {
