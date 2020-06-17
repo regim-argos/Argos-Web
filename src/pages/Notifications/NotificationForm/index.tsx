@@ -62,7 +62,7 @@ export default function NotificationForm({
             label="Webhook"
             variant="outlined"
           />
-          <Button type="submit" color="primary">
+          <Button variant="contained" type="submit" color="primary">
             Save
           </Button>
         </Form>

@@ -1,13 +1,11 @@
 import styled from 'styled-components';
 import Input from '../Input';
 
+export const Container = styled.div`
+  margin-top: 10px;
+`;
 export const ItemList = styled.ul`
-  list-style: none;
-  display: flex;
-  margin-bottom: 20px;
-  max-height: 120px;
-  overflow: auto;
-  flex-direction: column;
+  display: none;
 `;
 export const Item = styled.li`
   display: flex;
@@ -31,11 +29,3 @@ export const Item = styled.li`
 `;
 
 export const HiddenInput = styled(Input)``;
-
-export const ButtonContainer = styled.div`
-  display: flex;
-  padding-bottom: 15px;
-  margin: 0px;
-  justify-content: center;
-  align-self: center;
-`;
