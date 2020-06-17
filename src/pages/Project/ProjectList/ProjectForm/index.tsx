@@ -35,7 +35,7 @@ export default function ProjectForm({ open, onClose }: ProjectFormProps) {
           >
             <Input name="id" type="hidden" variant="outlined" />
             <Input name="name" type="text" label="Name" variant="outlined" />
-            <Button type="submit" color="primary">
+            <Button variant="contained" type="submit" color="primary">
               Save
             </Button>
           </Form>

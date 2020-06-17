@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
-import { MdClose } from 'react-icons/md';
 import INotification from 'Types/INotification';
-import StyledButton from '../RoundButton';
 
-import { ItemList, Item, HiddenInput, ButtonContainer } from './styles';
+import { ItemList, HiddenInput, Container } from './styles';
 
 interface Items {
   itemName: string;
@@ -20,51 +18,44 @@ function NotificationAutocomplete({
   defaultItemValue: INotification[];
 }) {
   const [selectedItems, setSelectedItems] = useState<INotification[]>(
-    defaultItemValue
+    defaultItemValue.map(
+      (notification) =>
+        itemList.find(
+          (selected) => selected.id === notification.id
+        ) as INotification
+    )
   );
 
-  function selectItem(value: INotification) {
+  function selectItem(value: INotification[]) {
     if (value !== null) {
-      setSelectedItems([...selectedItems, value]);
+      setSelectedItems(value);
     }
   }
-  const handleDeleteItem = (id: number) => {
-    setSelectedItems(selectedItems.filter((item) => item.id !== id));
-  };
 
   return (
-    <>
+    <Container>
       <ItemList>
         {selectedItems.map((item, index) => (
-          <Item key={item.id}>
-            <span>{item.name}</span>
-            <HiddenInput
-              name={`notifications[${index}].id`}
-              type="hidden"
-              variant="outlined"
-              value={item.id}
-            />
-            <ButtonContainer>
-              <StyledButton
-                Icon={MdClose}
-                color="#C5474B"
-                onClick={() => handleDeleteItem(item.id)}
-              />
-            </ButtonContainer>
-          </Item>
+          <HiddenInput
+            key={item.id}
+            name={`notifications[${index}].id`}
+            defaultValue={item.id}
+          />
         ))}
       </ItemList>
       <Autocomplete
+        multiple
         onChange={(e, v) => {
           if (v) selectItem(v);
         }}
+        value={selectedItems}
         options={itemList}
         getOptionLabel={(item) => item.name}
         renderInput={(params) => (
           <TextField {...params} label="Notifications" variant="outlined" />
         )}
       />
-    </>
+    </Container>
   );
 }
 

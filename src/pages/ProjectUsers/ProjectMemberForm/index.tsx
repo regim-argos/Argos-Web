@@ -35,7 +35,7 @@ export default function MemberForm({ open, onClose }: MemberFormProps) {
             }}
           >
             <Input name="email" type="text" label="Email" variant="outlined" />
-            <Button type="submit" color="primary">
+            <Button variant="contained" type="submit" color="primary">
               Save
             </Button>
           </Form>

@@ -68,7 +68,7 @@ export default function WatcherForm({
               itemList={notificationsList}
               defaultItemValue={initialData?.notifications || []}
             />
-            <Button type="submit" color="primary">
+            <Button variant="contained" type="submit" color="primary">
               Save
             </Button>
           </Form>
