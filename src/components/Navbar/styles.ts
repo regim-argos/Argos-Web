@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import theme from 'styles/theme';
 
 export const NavContainer = styled.nav`
+  > a {
+    text-decoration: none;
+  }
   min-height: 60px;
   width: 100%;
   padding: 0 50px;

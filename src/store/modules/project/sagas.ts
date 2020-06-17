@@ -15,6 +15,7 @@ import {
   projectSaveFaliure,
   projectSuccessOne,
   projectsFaliureOne,
+  projectCloseModal,
   memberSaveSuccess,
   memberCloseModal,
   projectRequestOne,
@@ -65,6 +66,7 @@ export function* saveProjects({ payload }: Action) {
     }
 
     yield put(projectSaveSuccess());
+    yield put(projectCloseModal());
     yield put(projectsRequest());
   } catch (err) {
     toast.error("Error, can't find projects");
@@ -87,8 +89,6 @@ export function* saveMember({ payload: { email, projectId } }: Action) {
 
 export function* removeMember({ payload: { email, projectId } }: Action) {
   try {
-    console.log(email);
-
     yield call(api.delete, `${projectId}/projectMember`, { data: { email } });
 
     yield put(memberSaveSuccess());

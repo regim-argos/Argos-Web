@@ -6,6 +6,7 @@ import ArgosLog from 'assets/Ativo-5.svg';
 import { signOut } from 'store/modules/auth/actions';
 
 import RoundButton from 'components/RoundButton';
+import { Link } from 'react-router-dom';
 import { NavContainer, LogoContainer } from './styles';
 
 export default function Navbar() {
@@ -13,10 +14,12 @@ export default function Navbar() {
 
   return (
     <NavContainer>
-      <LogoContainer>
-        <img src={ArgosLog} alt="ArgosLog" />
-        <h1>Argos</h1>
-      </LogoContainer>
+      <Link to="/project">
+        <LogoContainer>
+          <img src={ArgosLog} alt="ArgosLog" />
+          <h1>Argos</h1>
+        </LogoContainer>
+      </Link>
       <div>
         <img
           src="https://ui-avatars.com/api/?name=Diogo+MAchado&background=0D8ABC&color=fff&rounded=true&bold=true&size=128"
