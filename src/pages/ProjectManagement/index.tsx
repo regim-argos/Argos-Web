@@ -10,7 +10,10 @@ import Watchers from 'pages/Watchers';
 import Notifications from 'pages/Notifications';
 import NavigationMenu from 'components/NavigationMenu';
 import { useDispatch } from 'react-redux';
-import { projectRequestOne } from 'store/modules/project/actions';
+import {
+  projectRequestOne,
+  projectSuccessOne,
+} from 'store/modules/project/actions';
 import ProjectUsers from 'pages/ProjectUsers';
 
 // import { Container } from './styles';
@@ -24,6 +27,13 @@ const ProjectManagement: React.FC = () => {
   useEffect(() => {
     dispatch(projectRequestOne(projectId));
   }, [dispatch, projectId]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(projectSuccessOne(undefined));
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

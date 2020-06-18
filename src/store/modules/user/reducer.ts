@@ -38,7 +38,7 @@ export default function user(
       }
       case '@project/PROJECT_SUCCESS_ONE': {
         draft.isOwner = false;
-        const find = action.payload.project.members.find(
+        const find = action.payload.project?.members.find(
           (member) =>
             member.userId === draft.profile?.id && member.role === 'OWNER'
         );

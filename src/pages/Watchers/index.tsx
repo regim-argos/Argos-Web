@@ -8,6 +8,7 @@ import {
   watchersSaveRequest,
   watcherOpenModal,
   watcherCloseModal,
+  watchersSuccess,
 } from 'store/modules/watcher/actions';
 import Loading from 'components/Loading';
 import ArgosReduxStates from 'Types/ArgosReduxStates';
@@ -37,6 +38,13 @@ export default function Watchers() {
   useEffect(() => {
     dispatch(watchersRequest(projectId));
   }, [dispatch, projectId]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(watchersSuccess([]));
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function handleDelete(id: number) {
     dispatch(watchersDelete(id, projectId));
