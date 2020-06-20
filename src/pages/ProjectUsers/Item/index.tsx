@@ -19,6 +19,7 @@ export default function Item({ member: { email }, handleDelete }: ItemProps) {
 
       <div>
         <RoundButton
+          text="Delete"
           onClick={() => handleDelete(email)}
           Icon={MdDelete}
           color="#C5474B"

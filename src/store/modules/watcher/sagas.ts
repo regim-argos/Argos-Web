@@ -15,6 +15,8 @@ import {
   watchersSaveFaliure,
   watchersSaveSuccess,
   watcherCloseModal,
+  watcherDetailFailure,
+  watcherDetailSuccess,
 } from './actions';
 
 const takeLatest: any = sagaTakelastest;
@@ -37,6 +39,17 @@ export function* getWatchers({ payload: { projectId } }: Action) {
   } catch (err) {
     toast.error("Error, can't find watchers");
     yield put(watchersFailure());
+  }
+}
+
+export function* getWatcherDetail({ payload: { projectId, id } }: Action) {
+  try {
+    const response = yield call(api.get, `${projectId}/watchersDetail/${id}`);
+
+    yield put(watcherDetailSuccess(response.data));
+  } catch (err) {
+    toast.error("Error, can't find watcher Detail");
+    yield put(watcherDetailFailure());
   }
 }
 
@@ -71,6 +84,7 @@ export function* watchersSave({ payload: { projectId, watcher } }: Action) {
 
 export default all([
   takeLatest('@watcher/WATCHERS_REQUEST', getWatchers),
+  takeLatest('@watcher/WATCHER_DETAIL_REQUEST', getWatcherDetail),
   takeLatest('@watcher/WATCHERS_SAVE_RESQUEST', watchersSave),
   takeLatest('@watcher/WATCHERS_DELETE', watchersDelete),
 ]);

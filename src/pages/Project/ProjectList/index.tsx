@@ -52,6 +52,7 @@ export default function ProjectList() {
       <Container>
         <div>
           <RoundButton
+            text="Add"
             Icon={MdAdd}
             color="#6081F5"
             onClick={() => dispatch(projectOpenModal())}

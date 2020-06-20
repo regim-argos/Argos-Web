@@ -38,6 +38,7 @@ export const WatcherList = styled.li`
 
 export const StatusInfo = styled.div<{ status: boolean }>`
   height: 35px;
+  cursor: pointer;
   width: 34px;
   border-radius: 50%;
   background-color: ${({ status }) => (status ? '#44B04C' : '#C5474B')};

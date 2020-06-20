@@ -69,6 +69,7 @@ export default function Watchers() {
       <Container>
         <div>
           <StyledButton
+            text="Add"
             Icon={MdAdd}
             color="#6081F5"
             onClick={() => {

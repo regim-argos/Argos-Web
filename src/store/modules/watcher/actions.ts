@@ -1,4 +1,4 @@
-import IWatcher from 'Types/IWatcher';
+import IWatcher, { IWatcherDetail } from 'Types/IWatcher';
 
 export function watchersRequest(projectId: number) {
   return {
@@ -60,5 +60,25 @@ export function watcherOpenModal() {
 export function watcherCloseModal() {
   return {
     type: '@watcher/CLOSE_MODAL',
+  };
+}
+
+export function watcherDetailRequest(projectId: number, id: number) {
+  return {
+    type: '@watcher/WATCHER_DETAIL_REQUEST',
+    payload: { projectId, id },
+  };
+}
+
+export function watcherDetailSuccess(watcherDetail: IWatcherDetail) {
+  return {
+    type: '@watcher/WATCHER_DETAIL_SUCCESS',
+    payload: { watcherDetail },
+  };
+}
+
+export function watcherDetailFailure() {
+  return {
+    type: '@watcher/WATCHER_DETAIL_FAILURE',
   };
 }

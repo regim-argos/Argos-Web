@@ -26,6 +26,7 @@ export default function Navbar() {
           alt="profile"
         />
         <RoundButton
+          text="SingOut"
           Icon={MdExitToApp}
           color="#C5474B"
           onClick={() => dispatch(signOut())}

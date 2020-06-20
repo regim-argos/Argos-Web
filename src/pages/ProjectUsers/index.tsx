@@ -41,6 +41,7 @@ const ProjectUsers: React.FC = () => {
       <Container>
         <div>
           <RoundButton
+            text="Add"
             Icon={MdAdd}
             color="#6081F5"
             onClick={() => dispatch(memberOpenModal())}
