@@ -1,5 +1,5 @@
 import produce from 'immer';
-import IWatcher from 'Types/IWatcher';
+import IWatcher, { IWatcherDetail } from 'Types/IWatcher';
 
 const INITIAL_STATE = {
   watchers: [],
@@ -10,6 +10,7 @@ const INITIAL_STATE = {
 export interface WatcherState {
   watchers: IWatcher[];
   editWatcher?: IWatcher;
+  watcherDetail?: IWatcherDetail;
   loading: boolean;
   openModal: boolean;
 }
@@ -19,6 +20,7 @@ interface WatcherAction {
   payload: {
     watchers: IWatcher[];
     watcher: IWatcher;
+    watcherDetail: IWatcherDetail;
   };
 }
 
@@ -28,12 +30,14 @@ export default function watcher(
 ) {
   return produce(state, (draft) => {
     switch (action.type) {
+      case '@watcher/WATCHER_DETAIL_REQUEST':
       case '@watcher/WATCHERS_REQUEST':
       case '@watcher/WATCHERS_SAVE_RESQUEST':
       case '@watcher/WATCHERS_DELETE': {
         draft.loading = true;
         break;
       }
+      case '@watcher/WATCHER_DETAIL_FAILURE':
       case '@watcher/WATCHERS_FAILURE':
       case '@watcher/WATCHERS_SAVE_SUCCESS':
       case '@watcher/WATCHERS_SAVE_FALIURE':
@@ -44,6 +48,11 @@ export default function watcher(
       case '@watcher/WATCHERS_SUCCESS': {
         draft.loading = false;
         draft.watchers = action.payload.watchers;
+        break;
+      }
+      case '@watcher/WATCHER_DETAIL_SUCCESS': {
+        draft.loading = false;
+        draft.watcherDetail = action.payload.watcherDetail;
         break;
       }
       case '@watcher/OPEN_MODAL': {

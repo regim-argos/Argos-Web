@@ -11,12 +11,20 @@ import Loading from 'components/Loading';
 import ArgosReduxStates from 'Types/ArgosReduxStates';
 import IProject from 'Types/IProject';
 import RoundButton from 'components/RoundButton';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { useRouteMatch, useHistory } from 'react-router-dom';
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  Typography,
+} from '@material-ui/core';
 import { Container } from './styles';
 import ProjectForm from './ProjectForm';
 
 export default function ProjectList() {
   const dispatch = useDispatch();
+
+  const history = useHistory();
 
   const loading = useSelector<ArgosReduxStates, boolean>(
     (state) => state.project.loading
@@ -44,6 +52,7 @@ export default function ProjectList() {
       <Container>
         <div>
           <RoundButton
+            text="Add"
             Icon={MdAdd}
             color="#6081F5"
             onClick={() => dispatch(projectOpenModal())}
@@ -51,14 +60,19 @@ export default function ProjectList() {
         </div>
         <ul>
           {projects.map((project) => (
-            <Link to={`${url}/${project.id}`}>
-              <h1>{project.name}</h1>
-            </Link>
-            // <ProjectList
-            //   key={project.id}
-            //   project={project}
-            //   handleSave={handleSave}
-            // />
+            <li key={project.id}>
+              <Card>
+                <CardActionArea
+                  onClick={() => history.push(`${url}/${project.id}`)}
+                >
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {project.name}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </li>
           ))}
         </ul>
       </Container>

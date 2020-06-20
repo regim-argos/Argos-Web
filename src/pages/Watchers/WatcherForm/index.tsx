@@ -12,6 +12,7 @@ import ArgosReduxStates from 'Types/ArgosReduxStates';
 import INotification from 'Types/INotification';
 import NotificationAutocomplete from 'components/NotificationAutocomplete';
 import { useParams } from 'react-router-dom';
+import Slider from 'components/Slider';
 import Input from '../../../components/Input';
 import { WatcherFormModal } from './styles';
 
@@ -58,11 +59,13 @@ export default function WatcherForm({
             <Input name="id" type="hidden" variant="outlined" />
             <Input name="name" type="text" label="Name" variant="outlined" />
             <Input name="url" type="text" label="URL" variant="outlined" />
-            <Input
+            <Slider
               name="delay"
-              type="text"
               label="Interval in seconds"
-              variant="outlined"
+              step={5}
+              marks
+              min={10}
+              max={300}
             />
             <NotificationAutocomplete
               itemList={notificationsList}

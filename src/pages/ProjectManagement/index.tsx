@@ -10,8 +10,13 @@ import Watchers from 'pages/Watchers';
 import Notifications from 'pages/Notifications';
 import NavigationMenu from 'components/NavigationMenu';
 import { useDispatch } from 'react-redux';
-import { projectRequestOne } from 'store/modules/project/actions';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import {
+  projectRequestOne,
+  projectSuccessOne,
+} from 'store/modules/project/actions';
 import ProjectUsers from 'pages/ProjectUsers';
+import EventTimeline from 'pages/EventTimeline';
 
 // import { Container } from './styles';
 
@@ -25,23 +30,41 @@ const ProjectManagement: React.FC = () => {
     dispatch(projectRequestOne(projectId));
   }, [dispatch, projectId]);
 
+  useEffect(() => {
+    return () => {
+      dispatch(projectSuccessOne(undefined));
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
       <NavigationMenu />
-      <Switch>
-        <Route component={Watchers} exact path={`${path}/watcher`} />
-        <Route component={ProjectUsers} exact path={`${path}/projectUsers`} />
-        <Route component={Notifications} exact path={`${path}/notification`} />
-        <Route
-          component={() => <Redirect to={`${url}/watcher`} />}
-          exact
-          path={`${path}/`}
-        />
-        <Route
-          path={`${path}/*`}
-          component={() => <Redirect to={`${url}/watcher`} />}
-        />
-      </Switch>
+      <PerfectScrollbar>
+        <Switch>
+          <Route component={Watchers} exact path={`${path}/watcher`} />
+          <Route
+            component={EventTimeline}
+            exact
+            path={`${path}/watcherTimeLine/:id`}
+          />
+          <Route component={ProjectUsers} exact path={`${path}/projectUsers`} />
+          <Route
+            component={Notifications}
+            exact
+            path={`${path}/notification`}
+          />
+          <Route
+            component={() => <Redirect to={`${url}/watcher`} />}
+            exact
+            path={`${path}/`}
+          />
+          <Route
+            path={`${path}/*`}
+            component={() => <Redirect to={`${url}/watcher`} />}
+          />
+        </Switch>
+      </PerfectScrollbar>
     </>
   );
 };

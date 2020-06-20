@@ -60,7 +60,7 @@ export default function Notifications() {
     <>
       <Container>
         <div>
-          <StyledButton onClick={() => openModal()} />
+          <StyledButton text="Add" onClick={() => openModal()} />
         </div>
         <ul>
           {notifications.map((notification) => (

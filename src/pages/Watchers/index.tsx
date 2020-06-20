@@ -8,6 +8,7 @@ import {
   watchersSaveRequest,
   watcherOpenModal,
   watcherCloseModal,
+  watchersSuccess,
 } from 'store/modules/watcher/actions';
 import Loading from 'components/Loading';
 import ArgosReduxStates from 'Types/ArgosReduxStates';
@@ -38,6 +39,13 @@ export default function Watchers() {
     dispatch(watchersRequest(projectId));
   }, [dispatch, projectId]);
 
+  useEffect(() => {
+    return () => {
+      dispatch(watchersSuccess([]));
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   function handleDelete(id: number) {
     dispatch(watchersDelete(id, projectId));
   }
@@ -61,6 +69,7 @@ export default function Watchers() {
       <Container>
         <div>
           <StyledButton
+            text="Add"
             Icon={MdAdd}
             color="#6081F5"
             onClick={() => {

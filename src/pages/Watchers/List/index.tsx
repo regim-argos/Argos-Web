@@ -10,6 +10,7 @@ import {
 
 import IWatcher from 'Types/IWatcher';
 import RoundButton from 'components/RoundButton';
+import { useHistory } from 'react-router-dom';
 import { WatcherList, StatusInfo } from './styles';
 
 interface ListProps {
@@ -26,10 +27,14 @@ export default function List({
   handleSave,
   handleChange,
 }: ListProps) {
+  const history = useHistory();
   return (
     <WatcherList>
       <div>
-        <StatusInfo status={status}>
+        <StatusInfo
+          status={status}
+          onClick={() => history.push(`watcherTimeLine/${id}`)}
+        >
           {status ? (
             <MdArrowUpward color="#fff" />
           ) : (
@@ -41,19 +46,22 @@ export default function List({
 
       <div>
         <a href={url} target="_blank" rel="noopener noreferrer">
-          <RoundButton Icon={MdLink} color="#6081F5" />
+          <RoundButton text="Url" Icon={MdLink} color="#6081F5" />
         </a>
         <RoundButton
+          text={active ? 'on' : 'off'}
           Icon={MdPowerSettingsNew}
           color={active ? '#44B04C' : '#9C9C9C'}
           onClick={() => handleSave({ ...watcher, active: !active })}
         />
         <RoundButton
+          text="Edit"
           Icon={MdEdit}
           color="#DEB23C"
           onClick={() => handleChange(watcher)}
         />
         <RoundButton
+          text="Delete"
           onClick={() => handleDelete(id)}
           Icon={MdDelete}
           color="#C5474B"

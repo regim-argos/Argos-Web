@@ -15,7 +15,24 @@ export const Container = styled(PerfectScrollbar)`
   }
   > ul {
     display: flex;
-    flex-direction: column;
     margin-top: 20px;
+    list-style: none;
+    > li {
+      width: 300px;
+      min-height: 200px;
+      > div {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        > button {
+          display: flex;
+          height: 100%;
+          align-items: center;
+        }
+      }
+    }
+    > li + li {
+      margin-left: 20px;
+    }
   }
 `;

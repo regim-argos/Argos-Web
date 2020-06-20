@@ -26,16 +26,19 @@ export default function List({
       </div>
       <div>
         <RoundButton
+          text={active ? 'on' : 'off'}
           Icon={MdPowerSettingsNew}
           color={active ? '#44B04C' : '#9C9C9C'}
           onClick={() => handleSave({ ...notification, active: !active })}
         />
         <RoundButton
+          text="Edit"
           Icon={MdEdit}
           color="#DEB23C"
           onClick={() => handleEditNotification(notification)}
         />
         <RoundButton
+          text="Delete"
           Icon={MdDelete}
           color="#C5474B"
           onClick={() => handleDelete(id)}

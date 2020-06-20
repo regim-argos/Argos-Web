@@ -26,7 +26,7 @@ export function projectRequestOne(id: number) {
   };
 }
 
-export function projectSuccessOne(project: IProject) {
+export function projectSuccessOne(project: IProject | undefined) {
   return {
     type: '@project/PROJECT_SUCCESS_ONE',
     payload: { project },
