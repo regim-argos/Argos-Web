@@ -31,23 +31,16 @@ export default function watcher(
   return produce(state, (draft) => {
     switch (action.type) {
       case '@watcher/WATCHER_DETAIL_REQUEST':
-      case '@watcher/WATCHERS_REQUEST':
       case '@watcher/WATCHERS_SAVE_RESQUEST':
       case '@watcher/WATCHERS_DELETE': {
         draft.loading = true;
         break;
       }
       case '@watcher/WATCHER_DETAIL_FAILURE':
-      case '@watcher/WATCHERS_FAILURE':
       case '@watcher/WATCHERS_SAVE_SUCCESS':
       case '@watcher/WATCHERS_SAVE_FALIURE':
       case '@watcher/WATCHERS_DELETE_SUCCESS': {
         draft.loading = false;
-        break;
-      }
-      case '@watcher/WATCHERS_SUCCESS': {
-        draft.loading = false;
-        draft.watchers = action.payload.watchers;
         break;
       }
       case '@watcher/WATCHER_DETAIL_SUCCESS': {

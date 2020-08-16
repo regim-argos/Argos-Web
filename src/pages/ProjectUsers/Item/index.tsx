@@ -7,10 +7,15 @@ import { ItemContainer } from './styles';
 
 interface ItemProps {
   member: IMember;
+  userId: number | undefined;
   handleDelete: (email: string) => void;
 }
 
-export default function Item({ member: { email }, handleDelete }: ItemProps) {
+export default function Item({
+  member: { email, userId: memberId },
+  handleDelete,
+  userId,
+}: ItemProps) {
   return (
     <ItemContainer>
       <div>
@@ -18,12 +23,14 @@ export default function Item({ member: { email }, handleDelete }: ItemProps) {
       </div>
 
       <div>
-        <RoundButton
-          text="Delete"
-          onClick={() => handleDelete(email)}
-          Icon={MdDelete}
-          color="#C5474B"
-        />
+        {userId !== memberId && (
+          <RoundButton
+            text="Delete"
+            onClick={() => handleDelete(email)}
+            Icon={MdDelete}
+            color="#C5474B"
+          />
+        )}
       </div>
     </ItemContainer>
   );

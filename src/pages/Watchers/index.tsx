@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { MdAdd } from 'react-icons/md';
+import { toast } from 'react-toastify';
 
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  watchersRequest,
   watchersDelete,
   watchersSaveRequest,
   watcherOpenModal,
   watcherCloseModal,
-  watchersSuccess,
 } from 'store/modules/watcher/actions';
-import Loading from 'components/Loading';
 import ArgosReduxStates from 'Types/ArgosReduxStates';
 import IWatcher from 'Types/IWatcher';
 import { useParams } from 'react-router-dom';
+import useSWR from 'swr';
+import { closeApi } from 'services/api';
 import StyledButton from '../../components/RoundButton';
 import WatcherList from './List';
 import { Container } from './styles';
@@ -28,23 +28,19 @@ export default function Watchers() {
   const open = useSelector<ArgosReduxStates, boolean>(
     (state) => state.watcher.openModal
   );
-  const loading = useSelector<ArgosReduxStates, boolean>(
-    (state) => state.watcher.loading
-  );
-  const watchers = useSelector<ArgosReduxStates, IWatcher[]>(
-    (state) => state.watcher.watchers
-  );
 
-  useEffect(() => {
-    dispatch(watchersRequest(projectId));
-  }, [dispatch, projectId]);
+  const { data: watchers } = useSWR<IWatcher[]>(
+    `${projectId}/watchers`,
+    async (url) => {
+      const response = await closeApi.get(url);
 
-  useEffect(() => {
-    return () => {
-      dispatch(watchersSuccess([]));
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+      return response.data;
+    },
+    {
+      onError: () => toast.error("Error, can't find watchers"),
+      refreshInterval: 10000,
+    }
+  );
 
   function handleDelete(id: number) {
     dispatch(watchersDelete(id, projectId));
@@ -78,20 +74,17 @@ export default function Watchers() {
           />
         </div>
         <ul>
-          {watchers &&
-            watchers.map((watcher) => (
-              <WatcherList
-                key={watcher.id}
-                watcher={watcher}
-                handleChange={handleEditWatcher}
-                handleDelete={handleDelete}
-                handleSave={handleSave}
-              />
-            ))}
+          {watchers?.map((watcher) => (
+            <WatcherList
+              key={watcher.id}
+              watcher={watcher}
+              handleChange={handleEditWatcher}
+              handleDelete={handleDelete}
+              handleSave={handleSave}
+            />
+          ))}
         </ul>
       </Container>
-
-      <Loading loading={loading} />
 
       <WatcherFormModal
         initialData={editWatcher}
