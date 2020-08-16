@@ -56,7 +56,7 @@ export function* signIn({ payload }: Action) {
 
     history.push('/');
   } catch (err) {
-    toast.error('Falha na autenticação, verifique seus dados');
+    toast.error(err?.response?.data?.message || 'Server error');
     yield put(signFailure());
   }
 }
@@ -75,7 +75,7 @@ export function* signUp({ payload }: Action) {
 
     history.push('/');
   } catch (err) {
-    toast.error('Falha no cadastro, verifique seus dados!');
+    toast.error(err?.response?.data?.message || 'Server error');
 
     yield put(signFailure());
   }
@@ -91,10 +91,10 @@ export function* forgetPassword({ payload }: Action) {
 
     yield put(forgetPasswordSuccess());
 
-    toast.success('Email enviado com sucesso!');
+    toast.success('Email sent!');
     history.push('/');
   } catch (err) {
-    toast.error('Falha email precisa ser confirmado!');
+    toast.error(err?.response?.data?.message || 'Server error');
     yield put(forgetPasswordFailure());
   }
 }
@@ -110,10 +110,10 @@ export function* forgetPasswordPut({ payload }: Action) {
 
     yield put(forgetPasswordPutSuccess());
 
-    toast.success('Senha alterada!');
+    toast.success('Password changed!');
     history.push('/');
   } catch (err) {
-    toast.error('Codigo expirado!');
+    toast.error(err?.response?.data?.message || 'Server error');
     yield put(forgetPasswordPutFailure());
   }
 }
@@ -128,10 +128,10 @@ export function* confirmEmail({ payload }: Action) {
 
     yield put(confirmEmailSuccess());
 
-    toast.success('Email enviado com sucesso!');
+    toast.success('Email sent!');
     history.push('/');
   } catch (err) {
-    toast.error('Falha email invalido!');
+    toast.error(err?.response?.data?.message || 'Server error');
     yield put(confirmEmailFailure());
   }
 }
@@ -144,10 +144,10 @@ export function* confirmEmailPut({ payload }: Action) {
 
     yield put(confirmEmailPutSuccess());
 
-    toast.success('Email confirmado com sucesso!');
+    toast.success('Email confirmed!');
     history.push('/');
   } catch (err) {
-    toast.error('Codigo expirado!');
+    toast.error(err?.response?.data?.message || 'Server error');
     yield put(confirmEmailPutFailure());
   }
 }

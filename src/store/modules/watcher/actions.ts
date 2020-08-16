@@ -1,25 +1,5 @@
 import IWatcher, { IWatcherDetail } from 'Types/IWatcher';
 
-export function watchersRequest(projectId: number) {
-  return {
-    type: '@watcher/WATCHERS_REQUEST',
-    payload: { projectId },
-  };
-}
-
-export function watchersSuccess(watchers: IWatcher[]) {
-  return {
-    type: '@watcher/WATCHERS_SUCCESS',
-    payload: { watchers },
-  };
-}
-
-export function watchersFailure() {
-  return {
-    type: '@watcher/WATCHERS_FAILURE',
-  };
-}
-
 export function watchersDelete(id: number, projectId: number) {
   return {
     type: '@watcher/WATCHERS_DELETE',

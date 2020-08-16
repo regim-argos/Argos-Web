@@ -35,7 +35,7 @@ export function* getNotifications({ payload: { projectId } }: Action) {
 
     yield put(notificationSuccess(response.data));
   } catch (err) {
-    toast.error("Error, can't find notifications");
+    toast.error(err?.response?.data?.message || 'Server error');
     yield put(notificationsFaliure());
   }
 }
@@ -47,7 +47,7 @@ export function* deleteNotifications({ payload: { id, projectId } }: Action) {
     yield put(notificationDeleteSuccess());
     yield put(notificationsRequest(projectId));
   } catch (err) {
-    toast.error("Error, can't find notifications");
+    toast.error(err?.response?.data?.message || 'Server error');
     yield put(notificationsFaliure());
   }
 }
@@ -69,7 +69,7 @@ export function* saveNotifications({
     yield put(notificationCloseModal());
     yield put(notificationsRequest(projectId));
   } catch (err) {
-    toast.error("Error, can't find notifications");
+    toast.error(err?.response?.data?.message || 'Server error');
     yield put(notificationSaveFaliure());
   }
 }

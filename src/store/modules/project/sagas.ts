@@ -41,7 +41,7 @@ export function* getProjects() {
 
     yield put(projectSuccess(response.data));
   } catch (err) {
-    toast.error("Error, can't find projects");
+    toast.error(err?.response?.data?.message || 'Server error');
     yield put(projectsFaliure());
   }
 }
@@ -52,7 +52,7 @@ export function* getOneProject({ payload: { id } }: Action) {
 
     yield put(projectSuccessOne(response.data));
   } catch (err) {
-    toast.error("Error, can't find projects");
+    toast.error(err?.response?.data?.message || 'Server error');
     yield put(projectsFaliureOne());
   }
 }
@@ -69,7 +69,7 @@ export function* saveProjects({ payload }: Action) {
     yield put(projectCloseModal());
     yield put(projectsRequest());
   } catch (err) {
-    toast.error("Error, can't find projects");
+    toast.error(err?.response?.data?.message || 'Server error');
     yield put(projectSaveFaliure());
   }
 }
@@ -82,7 +82,7 @@ export function* saveMember({ payload: { email, projectId } }: Action) {
     yield put(memberCloseModal());
     yield put(projectRequestOne(projectId));
   } catch (err) {
-    toast.error("Error, can't find projects");
+    toast.error(err?.response?.data?.message || 'Server error');
     yield put(memberSaveFaliure());
   }
 }
@@ -95,7 +95,7 @@ export function* removeMember({ payload: { email, projectId } }: Action) {
     yield put(memberCloseModal());
     yield put(projectRequestOne(projectId));
   } catch (err) {
-    toast.error("Error, can't find projects");
+    toast.error(err?.response?.data?.message || 'Server error');
     yield put(memberSaveFaliure());
   }
 }

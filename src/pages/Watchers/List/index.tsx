@@ -11,6 +11,7 @@ import {
 import IWatcher from 'Types/IWatcher';
 import RoundButton from 'components/RoundButton';
 import { useHistory } from 'react-router-dom';
+import { Tooltip } from '@material-ui/core';
 import { WatcherList, StatusInfo } from './styles';
 
 interface ListProps {
@@ -31,16 +32,18 @@ export default function List({
   return (
     <WatcherList>
       <div>
-        <StatusInfo
-          status={status}
-          onClick={() => history.push(`watcherTimeLine/${id}`)}
-        >
-          {status ? (
-            <MdArrowUpward color="#fff" />
-          ) : (
-            <MdArrowDownward color="#fff" />
-          )}
-        </StatusInfo>
+        <Tooltip title="Events" aria-label="Events" placement="top" arrow>
+          <StatusInfo
+            status={status}
+            onClick={() => history.push(`watcherTimeLine/${id}`)}
+          >
+            {status ? (
+              <MdArrowUpward color="#fff" />
+            ) : (
+              <MdArrowDownward color="#fff" />
+            )}
+          </StatusInfo>
+        </Tooltip>
         <span>{name}</span>
       </div>
 

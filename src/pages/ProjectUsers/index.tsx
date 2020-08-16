@@ -25,6 +25,10 @@ const ProjectUsers: React.FC = () => {
     (state) => state.project.currentProject?.members
   );
 
+  const userId = useSelector<ArgosReduxStates, number | undefined>(
+    (state) => state.user.profile?.id
+  );
+
   const loading = useSelector<ArgosReduxStates, boolean>(
     (state) => state.project.loading
   );
@@ -53,6 +57,7 @@ const ProjectUsers: React.FC = () => {
               <Item
                 key={member.email}
                 member={member}
+                userId={userId}
                 handleDelete={(email) =>
                   dispatch(memberRemoveRequest(email, projectId))
                 }

@@ -7,6 +7,9 @@ export const FormStyled = styled(Form)`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  > * + * {
+    margin-top: 10px !important;
+  }
   > div:last-child {
     display: flex;
     flex-direction: column;

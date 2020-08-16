@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import Timeline from '@material-ui/lab/Timeline';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,6 +19,11 @@ const EventTimeline: React.FC = () => {
     (state) => state.watcher.watcherDetail
   );
 
+  const revertEvent = useMemo(
+    () => (watcher ? [...watcher.events].reverse() : []),
+    [watcher]
+  );
+
   useEffect(() => {
     dispatch(watcherDetailRequest(projectId, id));
   }, [dispatch, id, projectId]);
@@ -26,7 +31,7 @@ const EventTimeline: React.FC = () => {
   return (
     <Container>
       <Timeline align="alternate">
-        {watcher?.events.map((event) => (
+        {revertEvent?.map((event) => (
           <EventItem
             key={event.startedAt}
             status={event.status}

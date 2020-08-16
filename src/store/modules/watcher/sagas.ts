@@ -5,13 +5,11 @@ import {
   all,
 } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
+import { mutate } from 'swr';
 
 import api from 'services/api';
 import {
-  watchersSuccess,
-  watchersFailure,
   watchersDeleteSuccess,
-  watchersRequest,
   watchersSaveFaliure,
   watchersSaveSuccess,
   watcherCloseModal,
@@ -31,24 +29,13 @@ interface Action {
   };
 }
 
-export function* getWatchers({ payload: { projectId } }: Action) {
-  try {
-    const response = yield call(api.get, `${projectId}/watchers`);
-
-    yield put(watchersSuccess(response.data));
-  } catch (err) {
-    toast.error("Error, can't find watchers");
-    yield put(watchersFailure());
-  }
-}
-
 export function* getWatcherDetail({ payload: { projectId, id } }: Action) {
   try {
     const response = yield call(api.get, `${projectId}/watchersDetail/${id}`);
 
     yield put(watcherDetailSuccess(response.data));
   } catch (err) {
-    toast.error("Error, can't find watcher Detail");
+    toast.error(err?.response?.data?.message || 'Server error');
     yield put(watcherDetailFailure());
   }
 }
@@ -58,10 +45,10 @@ export function* watchersDelete({ payload: { id, projectId } }: Action) {
     yield call(api.delete, `${projectId}/watchers/${id}`);
 
     yield put(watchersDeleteSuccess());
-    yield put(watchersRequest(projectId));
+    mutate(`${projectId}/watchers`);
   } catch (err) {
-    toast.error("Error, can't delete this watcher");
-    yield put(watchersFailure());
+    toast.error(err?.response?.data?.message || 'Server error');
+    yield put(watchersSaveFaliure());
   }
 }
 
@@ -75,15 +62,14 @@ export function* watchersSave({ payload: { projectId, watcher } }: Action) {
 
     yield put(watchersSaveSuccess());
     yield put(watcherCloseModal());
-    yield put(watchersRequest(projectId));
+    mutate(`${projectId}/watchers`);
   } catch (err) {
-    toast.error(`Error, ${err.response.data.message}`);
+    toast.error(err?.response?.data?.message || 'Server error');
     yield put(watchersSaveFaliure());
   }
 }
 
 export default all([
-  takeLatest('@watcher/WATCHERS_REQUEST', getWatchers),
   takeLatest('@watcher/WATCHER_DETAIL_REQUEST', getWatcherDetail),
   takeLatest('@watcher/WATCHERS_SAVE_RESQUEST', watchersSave),
   takeLatest('@watcher/WATCHERS_DELETE', watchersDelete),
