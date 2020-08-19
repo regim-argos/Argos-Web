@@ -31,7 +31,7 @@ export default function SlackIntegration(prop: any) {
             pretty: 1,
             code,
             client_id: '1050145130676.1051039952901',
-            client_secret: '044b29d4af0a097eda64f526732baf95',
+            client_secret: process.env.REACT_API_SLACK_SECRET,
             redirect_uri: `https://projectargos.tech/project/${projectId}/notification/slack${
               notificationId ? `/${notificationId}` : ''
             }?name=${name}`,
