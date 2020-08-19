@@ -43,7 +43,7 @@ export default function SingIn() {
           variant="outlined"
         />
         <div>
-          <Link to="/"> Forgot Your Password?</Link>
+          <Link to="/forgetPasswordRequest"> Forgot Your Password?</Link>
           <div>
             <CustomButton variant="contained" color="primary" type="submit">
               {loading ? 'Loading...' : 'Login'}
