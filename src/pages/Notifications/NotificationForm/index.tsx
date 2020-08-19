@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Button } from '@material-ui/core';
 
 import { useDispatch } from 'react-redux';
@@ -8,6 +8,7 @@ import SelectInput from 'components/SelectInput';
 import { notificationSaveRequest } from 'store/modules/notifications/actions';
 import INotification from 'Types/INotification';
 import { useParams } from 'react-router-dom';
+import { FormHandles } from '@unform/core';
 import Input from '../../../components/Input';
 
 import { NotificationFormModal } from './styles';
@@ -34,14 +35,32 @@ export default function NotificationForm({
   const { projectId } = useParams();
 
   const dispatch = useDispatch();
+
+  const form = useRef<FormHandles>(null);
+
+  function functionThatGetsData() {
+    // Get all data
+    return form?.current?.getData();
+  }
+
+  const [data, setData] = useState<INotification | undefined>(
+    initialData as INotification
+  );
+
+  useEffect(() => setData(initialData as INotification), [initialData]);
+
   return (
     <NotificationFormModal open={open} onClose={onClose}>
       <div id="notificationForm">
         <Form
+          form={form}
           initialData={initialData}
           schema={schema}
-          submitFunction={(data: INotification) => {
-            dispatch(notificationSaveRequest(data, projectId));
+          onChange={() => {
+            setData(functionThatGetsData() as INotification);
+          }}
+          submitFunction={(e: INotification) => {
+            dispatch(notificationSaveRequest(e, projectId));
           }}
         >
           <Input name="id" type="hidden" variant="outlined" />
@@ -56,12 +75,34 @@ export default function NotificationForm({
             ]}
           />
 
-          <Input
-            name="platformData.webhook"
-            type="text"
-            label="Webhook"
-            variant="outlined"
-          />
+          {data?.platform && (
+            <>
+              <Input
+                name="platformData.webhook"
+                type="text"
+                label="Webhook"
+                variant="outlined"
+              />
+              {data?.platform === 'SLACK' && (
+                <>
+                  <span> or </span>
+                  <a
+                    href={`https://slack.com/oauth/v2/authorize?scope=incoming-webhook&client_id=1050145130676.1051039952901&redirect_uri=https://projectargos.tech/project/${projectId}/notification/slack${
+                      data?.id ? `/${data?.id}` : ''
+                    }?name=${data?.name}&code=`}
+                  >
+                    <img
+                      alt="Add to Slack"
+                      height="40"
+                      width="139"
+                      src="https://platform.slack-edge.com/img/add_to_slack.png"
+                      srcSet="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"
+                    />
+                  </a>
+                </>
+              )}
+            </>
+          )}
           <Button variant="contained" type="submit" color="primary">
             Save
           </Button>

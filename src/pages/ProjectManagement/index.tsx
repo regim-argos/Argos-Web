@@ -17,6 +17,7 @@ import {
 } from 'store/modules/project/actions';
 import ProjectUsers from 'pages/ProjectUsers';
 import EventTimeline from 'pages/EventTimeline';
+import SlackIntegration from 'pages/Notifications/SlackIntegration';
 
 // import { Container } from './styles';
 
@@ -49,6 +50,16 @@ const ProjectManagement: React.FC = () => {
             path={`${path}/watcherTimeLine/:id`}
           />
           <Route component={ProjectUsers} exact path={`${path}/projectUsers`} />
+          <Route
+            component={SlackIntegration}
+            exact
+            path={`${path}/notification/slack`}
+          />
+          <Route
+            component={SlackIntegration}
+            exact
+            path={`${path}/notification/slack/:notificationId`}
+          />
           <Route
             component={Notifications}
             exact

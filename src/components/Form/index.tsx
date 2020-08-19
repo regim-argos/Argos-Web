@@ -10,6 +10,8 @@ interface FormProps {
   schema: Yup.Schema<any>;
   submitFunction: Function;
   initialData?: object;
+  onChange?: ((event: React.FormEvent<HTMLFormElement>) => void) | undefined;
+  form?: React.RefObject<FormHandles>;
 }
 
 const Form: React.FC<FormProps> = ({
@@ -17,9 +19,13 @@ const Form: React.FC<FormProps> = ({
   submitFunction,
   initialData,
   children,
+  onChange,
+  form,
   ...rest
 }) => {
-  const formRef = useRef<FormHandles>(null);
+  const formDefault = useRef<FormHandles>(null);
+
+  const formRef = form || formDefault;
 
   async function handleSubmit(data: FormData) {
     if (formRef.current) {
@@ -45,6 +51,7 @@ const Form: React.FC<FormProps> = ({
   }
   return (
     <Unform
+      onChange={onChange}
       initialData={initialData}
       ref={formRef}
       onSubmit={handleSubmit}

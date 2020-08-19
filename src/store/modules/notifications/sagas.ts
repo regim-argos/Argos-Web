@@ -7,6 +7,7 @@ import {
 import { toast } from 'react-toastify';
 
 import api from 'services/api';
+import history from 'services/history';
 import {
   notificationSuccess,
   notificationsFaliure,
@@ -68,6 +69,7 @@ export function* saveNotifications({
     yield put(notificationSaveSuccess());
     yield put(notificationCloseModal());
     yield put(notificationsRequest(projectId));
+    history.push(`/project/${projectId}/notification`);
   } catch (err) {
     toast.error(err?.response?.data?.message || 'Server error');
     yield put(notificationSaveFaliure());
