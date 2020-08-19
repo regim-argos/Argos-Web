@@ -9,23 +9,27 @@ interface IRoutes extends RouteProps {
   isPrivate?: boolean;
   isOnlyAdmin?: boolean;
   isOnlyPublic?: boolean;
+  isBoth?: boolean;
 }
 
 export default function RouteWrapper({
   Component,
   isPrivate = false,
+  isBoth = false,
   ...rest
 }: IRoutes) {
   const signed = useSelector<ArgosReduxStates, boolean>(
     (state) => state.auth.signed
   );
 
-  if (!signed && isPrivate) {
-    return <Redirect to="/" />;
-  }
+  if (!isBoth) {
+    if (!signed && isPrivate) {
+      return <Redirect to="/" />;
+    }
 
-  if (signed && !isPrivate) {
-    return <Redirect to="/project" />;
+    if (signed && !isPrivate) {
+      return <Redirect to="/project" />;
+    }
   }
 
   // @ts-ignore
