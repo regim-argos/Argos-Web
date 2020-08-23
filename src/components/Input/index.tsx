@@ -1,16 +1,20 @@
 import React, { useEffect, useRef } from 'react';
 import { useField } from '@unform/core';
 
-import { TextFieldProps } from '@material-ui/core';
 import {
   Input as ChakraInput,
   FormControl,
   FormErrorMessage,
   FormLabel,
   VisuallyHidden,
+  InputProps,
 } from '@chakra-ui/core';
 
-export default function Input({ name, label, type = 'text' }: TextFieldProps) {
+interface InputProp extends InputProps {
+  label?: string;
+}
+
+export default function Input({ name, label, type = 'text' }: InputProp) {
   const inputRef = useRef(null);
   const { fieldName, defaultValue = '', registerField, error } = useField(
     name || ''
