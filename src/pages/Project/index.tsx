@@ -9,7 +9,7 @@ const Project: React.FC = () => {
   const { path } = useRouteMatch();
 
   return (
-    <Container id="Contasiner">
+    <Container id="Container">
       <Box>
         <Navbar />
         <Switch>

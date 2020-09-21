@@ -66,7 +66,12 @@ export default function ProjectList() {
                   onClick={() => history.push(`${url}/${project.id}`)}
                 >
                   <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
+                    <Typography
+                      align="center"
+                      gutterBottom
+                      variant="h5"
+                      component="h2"
+                    >
                       {project.name}
                     </Typography>
                   </CardContent>
