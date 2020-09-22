@@ -17,5 +17,18 @@ export const Container = styled(PerfectScrollbar)`
     display: flex;
     flex-direction: column;
     margin-top: 20px;
+    > li {
+      display: flex;
+      min-width: 100%;
+      > div {
+        display: flex;
+        min-width: 100%;
+        > span {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
   }
 `;

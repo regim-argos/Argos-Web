@@ -48,27 +48,3 @@ export const Container = styled(PerfectScrollbar)`
     }
   }
 `;
-
-// > li {
-//   margin-top: 10px;
-//   display: flex;
-//   flex-grow: 1;
-//   max-width: 300px;
-//   min-height: 200px;
-//   > div {
-//     width: 100%;
-//     height: 100%;
-//     display: flex;
-//     justify-content: center;
-//     > button {
-//       display: flex;
-//       height: 100%;
-
-//       width: 100%;
-//       align-items: center;
-//     }
-//   }
-// }
-// > li + li {
-//   margin-left: 20px;
-// }
