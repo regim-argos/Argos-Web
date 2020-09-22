@@ -7,13 +7,11 @@ export const NavMenuContainer = styled.nav`
   .selected {
     > strong {
       font-size: 20px;
-      background: linear-gradient(to right, #ffe259, #ffa751);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #ffa751;
     }
 
     > div {
-      background: linear-gradient(to right, #ffe259, #ffa751);
+      background: #ffa751;
     }
   }
 `;
