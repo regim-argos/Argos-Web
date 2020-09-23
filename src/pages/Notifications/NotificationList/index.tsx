@@ -1,6 +1,11 @@
 import React from 'react';
-import { MdEdit, MdDelete, MdPowerSettingsNew } from 'react-icons/md';
-
+import {
+  MdEdit,
+  MdDelete,
+  MdPowerSettingsNew,
+  MdMoreVert,
+} from 'react-icons/md';
+import { Menu, MenuItem, IconButton } from '@material-ui/core';
 import INotification from 'Types/INotification';
 import RoundButton from 'components/RoundButton';
 import { NotificationList } from './styles';
@@ -19,6 +24,16 @@ export default function List({
   handleSave,
   handleEditNotification,
 }: ListProps) {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const ITEM_HEIGHT = 35;
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <NotificationList>
       <div>
@@ -43,6 +58,39 @@ export default function List({
           color="#C5474B"
           onClick={() => handleDelete(id)}
         />
+      </div>
+      <div>
+        <IconButton
+          aria-label="more"
+          aria-controls="long-menu"
+          aria-haspopup="true"
+          onClick={handleClick}
+        >
+          <MdMoreVert />
+        </IconButton>
+        <Menu
+          id="long-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={open}
+          onClose={handleClose}
+          PaperProps={{
+            style: {
+              maxHeight: ITEM_HEIGHT * 4.5,
+              width: '15ch',
+            },
+          }}
+        >
+          <MenuItem
+            onClick={() => handleSave({ ...notification, active: !active })}
+          >
+            {active ? 'Off' : 'On'}
+          </MenuItem>
+          <MenuItem onClick={() => handleEditNotification(notification)}>
+            Edit
+          </MenuItem>
+          <MenuItem onClick={() => handleDelete(id)}>Delete</MenuItem>
+        </Menu>
       </div>
     </NotificationList>
   );
