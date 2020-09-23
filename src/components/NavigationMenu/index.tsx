@@ -1,17 +1,27 @@
 import React from 'react';
-
+import { MdVisibility, MdNotificationsActive, MdPerson } from 'react-icons/md';
 import { useRouteMatch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ArgosReduxStates from 'Types/ArgosReduxStates';
+import { IconType } from 'react-icons/lib';
 import { NavMenuContainer, NavTab } from './styles';
 
 export default function NavigationMenu() {
   const isOwner = useSelector<ArgosReduxStates, boolean | undefined>(
     (state) => state.user.isOwner
   );
-  function NavTabBar({ tabName, to }: { tabName: string; to: string }) {
+  function NavTabBar({
+    tabName,
+    to,
+    Icon,
+  }: {
+    tabName: string;
+    to: string;
+    Icon: IconType;
+  }) {
     return (
       <NavTab to={to}>
+        <Icon color="#fff" />
         <strong>{tabName}</strong>
         <div />
       </NavTab>
@@ -21,9 +31,15 @@ export default function NavigationMenu() {
 
   return (
     <NavMenuContainer>
-      <NavTabBar tabName="Watchers" to={`${url}/watcher`} />
-      <NavTabBar tabName="Notifications" to={`${url}/notification`} />
-      {isOwner && <NavTabBar tabName="Users" to={`${url}/projectUsers`} />}
+      <NavTabBar Icon={MdVisibility} tabName="Watchers" to={`${url}/watcher`} />
+      <NavTabBar
+        Icon={MdNotificationsActive}
+        tabName="Notifications"
+        to={`${url}/notification`}
+      />
+      {isOwner && (
+        <NavTabBar Icon={MdPerson} tabName="Users" to={`${url}/projectUsers`} />
+      )}
     </NavMenuContainer>
   );
 }
