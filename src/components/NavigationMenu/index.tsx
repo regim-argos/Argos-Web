@@ -21,7 +21,7 @@ export default function NavigationMenu() {
   }) {
     return (
       <NavTab to={to}>
-        <Icon color="#fff" />
+        <Icon />
         <strong>{tabName}</strong>
         <div />
       </NavTab>
