@@ -20,9 +20,10 @@ export const Container = styled(PerfectScrollbar)`
     > li {
       display: flex;
       min-width: 100%;
-      > div {
+      > div:nth-child(1) {
         display: flex;
-        min-width: 100%;
+        width: 100%;
+        overflow: hidden;
         > span {
           white-space: nowrap;
           overflow: hidden;
