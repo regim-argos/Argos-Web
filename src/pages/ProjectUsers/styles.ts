@@ -32,4 +32,7 @@ export const Container = styled(PerfectScrollbar)`
       }
     }
   }
+  @media (max-width: 500px) {
+    padding: 20px 10px;
+  }
 `;
