@@ -22,6 +22,9 @@ export const NavContainer = styled.nav`
       margin-right: 10px;
     }
   }
+  @media (max-width: 500px) {
+    padding: 20px 10px;
+  }
 `;
 
 export const LogoContainer = styled.div`
