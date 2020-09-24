@@ -18,4 +18,7 @@ export const Container = styled(PerfectScrollbar)`
     flex-direction: column;
     margin-top: 20px;
   }
+  @media (max-width: 500px) {
+    padding: 20px 10px;
+  }
 `;
