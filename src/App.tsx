@@ -5,7 +5,9 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 
 import './config/ReactotronConfig';
-import { ThemeProvider } from '@material-ui/core';
+import { ChakraProvider, CSSReset } from '@chakra-ui/core';
+
+import theme from '@chakra-ui/theme';
 import { store, persistor } from './store';
 
 import GlobalStyle from './styles/global';
@@ -14,19 +16,19 @@ import './styles/styles.css';
 
 import history from './services/history';
 import 'react-perfect-scrollbar/dist/css/styles.css';
-import theme from './styles/theme';
 
 function App() {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <ThemeProvider theme={theme}>
+        <ChakraProvider theme={theme}>
+          <CSSReset />
           <Router history={history}>
             <Routes />
             <GlobalStyle />
             <ToastContainer autoClose={3000} />
           </Router>
-        </ThemeProvider>
+        </ChakraProvider>
       </PersistGate>
     </Provider>
   );

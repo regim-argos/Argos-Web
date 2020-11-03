@@ -20,9 +20,6 @@ export const NotificationFormModal = styled(Modal)`
       width: 100%;
       display: flex;
       flex-direction: column;
-      > * + * {
-        margin-top: 15px;
-      }
     }
   }
 `;
