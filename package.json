@@ -15,7 +15,7 @@
     "date-fns": "^2.14.0",
     "date-fns-tz": "^1.0.10",
     "history": "^4.10.1",
-    "immer": "^6.0.3",
+    "immer": "^9.0.6",
     "polished": "^3.5.1",
     "prop-types": "^15.7.2",
     "qs": "^6.9.4",
